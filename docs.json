@@ -37,8 +37,6 @@
       {
         "tab": "API Reference",
         "openapi": "https://api.rabot-charge.de/partner/swagger/v1/swagger.json"
-        
-      
       }
     ],
     "global": {
