@@ -124,7 +124,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Rabot.Partner.WebApi.Api.DataObjects.ApiListResponseDto`1[[Rabot.Partner.WebApi.Api.V1.DataObjects.ListItems.CustomerListItemDto, Rabot.Partner.WebApi, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                  "$ref": "#/components/schemas/Rabot.Partner.WebApi.Api.DataObjects.ApiListResponseDtoRabot.Partner.WebApi.Api.V1.DataObjects.ListItems.CustomerListItemDto"
                 }
               }
             }
@@ -173,7 +173,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Rabot.Partner.WebApi.Api.DataObjects.ApiListResponseDto`1[[Rabot.Partner.WebApi.Api.V1.Responses.Orders.GetContractResponseDto, Rabot.Partner.WebApi, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                  "$ref": "#/components/schemas/Rabot.Partner.WebApi.Api.DataObjects.ApiListResponseDtoRabot.Partner.WebApi.Api.V1.Responses.Orders.GetContractResponseDto"
                 }
               }
             }
@@ -267,7 +267,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Rabot.Partner.WebApi.Api.DataObjects.ApiResponseDto`1[[Rabot.Partner.WebApi.Api.V1.Responses.ContractMetrics.GetContractMetricsDto, Rabot.Partner.WebApi, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                  "$ref": "#/components/schemas/Rabot.Partner.WebApi.Api.DataObjects.ApiResponseDtoRabot.Partner.WebApi.Api.V1.Responses.ContractMetrics.GetContractMetricsDto"
                 }
               }
             }
@@ -342,7 +342,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Rabot.Partner.WebApi.Api.DataObjects.ApiListResponseDto`1[[Rabot.Partner.WebApi.Api.V1.Responses.Contract.InsertContractConsumptionPlanResponseDto, Rabot.Partner.WebApi, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                  "$ref": "#/components/schemas/Rabot.Partner.WebApi.Api.DataObjects.ApiListResponseDtoRabot.Partner.WebApi.Api.V1.Responses.Contract.InsertContractConsumptionPlanResponseDto"
                 }
               }
             }
@@ -395,7 +395,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Rabot.Partner.WebApi.Api.DataObjects.ApiListResponseDto`1[[Rabot.Partner.WebApi.Api.V1.Handlers.Customers.GetCustomerDocumentsResponse, Rabot.Partner.WebApi, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                  "$ref": "#/components/schemas/Rabot.Partner.WebApi.Api.DataObjects.ApiListResponseDtoRabot.Partner.WebApi.Api.V1.Handlers.Customers.GetCustomerDocumentsResponse"
                 }
               }
             }
@@ -478,7 +478,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Rabot.Partner.WebApi.Api.DataObjects.ApiResponseDto`1[[Rabot.Partner.WebApi.Api.V1.DataObjects.DayAheadPricesDto, Rabot.Partner.WebApi, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                  "$ref": "#/components/schemas/Rabot.Partner.WebApi.Api.DataObjects.ApiResponseDtoRabot.Partner.WebApi.Api.V1.DataObjects.DayAheadPricesDto"
                 }
               }
             }
@@ -551,7 +551,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Rabot.Partner.WebApi.Api.DataObjects.ApiResponseDto`1[[Rabot.Partner.WebApi.Api.V1.Responses.Order.GetOrdersByPartnerIdResponseDto, Rabot.Partner.WebApi, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                  "$ref": "#/components/schemas/Rabot.Partner.WebApi.Api.DataObjects.ApiResponseDtoRabot.Partner.WebApi.Api.V1.Responses.Order.GetOrdersByPartnerIdResponseDto"
                 }
               }
             }
@@ -582,7 +582,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Rabot.Partner.WebApi.Api.DataObjects.ApiResponseDto`1[[Rabot.Partner.WebApi.Api.V1.Responses.Order.GetOrderByContractNumberResponseDto, Rabot.Partner.WebApi, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                  "$ref": "#/components/schemas/Rabot.Partner.WebApi.Api.DataObjects.ApiResponseDtoRabot.Partner.WebApi.Api.V1.Responses.Order.GetOrderByContractNumberResponseDto"
                 }
               }
             }
@@ -613,17 +613,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/Rabot.Partner.WebApi.Api.DataObjects.ApiResponseDto`1[[Rabot.Partner.WebApi.Api.V1.DataObjects.TariffListItemDto, Rabot.Partner.WebApi, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                  "$ref": "#/components/schemas/Rabot.Partner.WebApi.Api.DataObjects.ApiResponseDtoRabot.Partner.WebApi.Api.V1.DataObjects.TariffListItemDto"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Rabot.Partner.WebApi.Api.DataObjects.ApiResponseDto`1[[Rabot.Partner.WebApi.Api.V1.DataObjects.TariffListItemDto, Rabot.Partner.WebApi, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                  "$ref": "#/components/schemas/Rabot.Partner.WebApi.Api.DataObjects.ApiResponseDtoRabot.Partner.WebApi.Api.V1.DataObjects.TariffListItemDto"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Rabot.Partner.WebApi.Api.DataObjects.ApiResponseDto`1[[Rabot.Partner.WebApi.Api.V1.DataObjects.TariffListItemDto, Rabot.Partner.WebApi, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                  "$ref": "#/components/schemas/Rabot.Partner.WebApi.Api.DataObjects.ApiResponseDtoRabot.Partner.WebApi.Api.V1.DataObjects.TariffListItemDto"
                 }
               }
             }
@@ -689,17 +689,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/Rabot.Partner.WebApi.Api.DataObjects.ApiResponseDto`1[[Rabot.Partner.WebApi.Api.V1.Responses.Tariff.TariffCalculationResponseDto, Rabot.Partner.WebApi, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                  "$ref": "#/components/schemas/Rabot.Partner.WebApi.Api.DataObjects.ApiResponseDtoRabot.Partner.WebApi.Api.V1.Responses.Tariff.TariffCalculationResponseDto"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Rabot.Partner.WebApi.Api.DataObjects.ApiResponseDto`1[[Rabot.Partner.WebApi.Api.V1.Responses.Tariff.TariffCalculationResponseDto, Rabot.Partner.WebApi, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                  "$ref": "#/components/schemas/Rabot.Partner.WebApi.Api.DataObjects.ApiResponseDtoRabot.Partner.WebApi.Api.V1.Responses.Tariff.TariffCalculationResponseDto"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Rabot.Partner.WebApi.Api.DataObjects.ApiResponseDto`1[[Rabot.Partner.WebApi.Api.V1.Responses.Tariff.TariffCalculationResponseDto, Rabot.Partner.WebApi, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                  "$ref": "#/components/schemas/Rabot.Partner.WebApi.Api.DataObjects.ApiResponseDtoRabot.Partner.WebApi.Api.V1.Responses.Tariff.TariffCalculationResponseDto"
                 }
               }
             }
@@ -751,7 +751,7 @@
         "type": "string",
         "description": "Enumerates the severity of an API error.<p>Members:</p><ul><li><i>Error</i> - Error; a critical error information.</li> <li><i>Warning</i> - Warning; an incorrect behavior information.</li> <li><i>Notice</i> - Notice; a non-standard behavior information.</li> </ul>"
       },
-      "Rabot.Partner.WebApi.Api.DataObjects.ApiListResponseDto`1[[Rabot.Partner.WebApi.Api.V1.DataObjects.ListItems.CustomerListItemDto, Rabot.Partner.WebApi, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+      "Rabot.Partner.WebApi.Api.DataObjects.ApiListResponseDtoRabot.Partner.WebApi.Api.V1.DataObjects.ListItems.CustomerListItemDto": {
         "type": "object",
         "properties": {
           "isSuccess": {
@@ -799,7 +799,7 @@
         "additionalProperties": false,
         "description": "API response DTO with a list of items."
       },
-      "Rabot.Partner.WebApi.Api.DataObjects.ApiListResponseDto`1[[Rabot.Partner.WebApi.Api.V1.Handlers.Customers.GetCustomerDocumentsResponse, Rabot.Partner.WebApi, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+      "Rabot.Partner.WebApi.Api.DataObjects.ApiListResponseDtoRabot.Partner.WebApi.Api.V1.Handlers.Customers.GetCustomerDocumentsResponse": {
         "type": "object",
         "properties": {
           "isSuccess": {
@@ -847,7 +847,7 @@
         "additionalProperties": false,
         "description": "API response DTO with a list of items."
       },
-      "Rabot.Partner.WebApi.Api.DataObjects.ApiListResponseDto`1[[Rabot.Partner.WebApi.Api.V1.Responses.Contract.InsertContractConsumptionPlanResponseDto, Rabot.Partner.WebApi, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+      "Rabot.Partner.WebApi.Api.DataObjects.ApiListResponseDtoRabot.Partner.WebApi.Api.V1.Responses.Contract.InsertContractConsumptionPlanResponseDto": {
         "type": "object",
         "properties": {
           "isSuccess": {
@@ -895,7 +895,7 @@
         "additionalProperties": false,
         "description": "API response DTO with a list of items."
       },
-      "Rabot.Partner.WebApi.Api.DataObjects.ApiListResponseDto`1[[Rabot.Partner.WebApi.Api.V1.Responses.Orders.GetContractResponseDto, Rabot.Partner.WebApi, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+      "Rabot.Partner.WebApi.Api.DataObjects.ApiListResponseDtoRabot.Partner.WebApi.Api.V1.Responses.Orders.GetContractResponseDto": {
         "type": "object",
         "properties": {
           "isSuccess": {
@@ -943,7 +943,7 @@
         "additionalProperties": false,
         "description": "API response DTO with a list of items."
       },
-      "Rabot.Partner.WebApi.Api.DataObjects.ApiResponseDto`1[[Rabot.Partner.WebApi.Api.V1.DataObjects.DayAheadPricesDto, Rabot.Partner.WebApi, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+      "Rabot.Partner.WebApi.Api.DataObjects.ApiResponseDtoRabot.Partner.WebApi.Api.V1.DataObjects.DayAheadPricesDto": {
         "type": "object",
         "properties": {
           "isSuccess": {
@@ -986,7 +986,7 @@
         "additionalProperties": false,
         "description": "API response DTO with data."
       },
-      "Rabot.Partner.WebApi.Api.DataObjects.ApiResponseDto`1[[Rabot.Partner.WebApi.Api.V1.DataObjects.TariffListItemDto, Rabot.Partner.WebApi, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+      "Rabot.Partner.WebApi.Api.DataObjects.ApiResponseDtoRabot.Partner.WebApi.Api.V1.DataObjects.TariffListItemDto": {
         "type": "object",
         "properties": {
           "isSuccess": {
@@ -1029,7 +1029,7 @@
         "additionalProperties": false,
         "description": "API response DTO with data."
       },
-      "Rabot.Partner.WebApi.Api.DataObjects.ApiResponseDto`1[[Rabot.Partner.WebApi.Api.V1.Responses.ContractMetrics.GetContractMetricsDto, Rabot.Partner.WebApi, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+      "Rabot.Partner.WebApi.Api.DataObjects.ApiResponseDtoRabot.Partner.WebApi.Api.V1.Responses.ContractMetrics.GetContractMetricsDto": {
         "type": "object",
         "properties": {
           "isSuccess": {
@@ -1072,7 +1072,7 @@
         "additionalProperties": false,
         "description": "API response DTO with data."
       },
-      "Rabot.Partner.WebApi.Api.DataObjects.ApiResponseDto`1[[Rabot.Partner.WebApi.Api.V1.Responses.Order.GetOrderByContractNumberResponseDto, Rabot.Partner.WebApi, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+      "Rabot.Partner.WebApi.Api.DataObjects.ApiResponseDtoRabot.Partner.WebApi.Api.V1.Responses.Order.GetOrderByContractNumberResponseDto": {
         "type": "object",
         "properties": {
           "isSuccess": {
@@ -1115,7 +1115,7 @@
         "additionalProperties": false,
         "description": "API response DTO with data."
       },
-      "Rabot.Partner.WebApi.Api.DataObjects.ApiResponseDto`1[[Rabot.Partner.WebApi.Api.V1.Responses.Order.GetOrdersByPartnerIdResponseDto, Rabot.Partner.WebApi, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+      "Rabot.Partner.WebApi.Api.DataObjects.ApiResponseDtoRabot.Partner.WebApi.Api.V1.Responses.Order.GetOrdersByPartnerIdResponseDto": {
         "type": "object",
         "properties": {
           "isSuccess": {
@@ -1158,7 +1158,7 @@
         "additionalProperties": false,
         "description": "API response DTO with data."
       },
-      "Rabot.Partner.WebApi.Api.DataObjects.ApiResponseDto`1[[Rabot.Partner.WebApi.Api.V1.Responses.Tariff.TariffCalculationResponseDto, Rabot.Partner.WebApi, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+      "Rabot.Partner.WebApi.Api.DataObjects.ApiResponseDtoRabot.Partner.WebApi.Api.V1.Responses.Tariff.TariffCalculationResponseDto": {
         "type": "object",
         "properties": {
           "isSuccess": {
@@ -2876,7 +2876,7 @@
           "yearlySavingsDetails": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/Rabot.Partner.WebApi.Api.V1.Responses.Tariff.TariffCalculationResponseDto+YearlySavingsDetailsDto"
+                "$ref": "#/components/schemas/Rabot.Partner.WebApi.Api.V1.Responses.Tariff.TariffCalculationResponseDtoYearlySavingsDetailsDto"
               }
             ],
             "description": "Information about yearly savings, compared to the local default supplier (Grundversorger)",
@@ -2886,7 +2886,7 @@
         "additionalProperties": false,
         "description": "Response containing the calculated tariff details."
       },
-      "Rabot.Partner.WebApi.Api.V1.Responses.Tariff.TariffCalculationResponseDto+YearlySavingsDetailsDto": {
+      "Rabot.Partner.WebApi.Api.V1.Responses.Tariff.TariffCalculationResponseDtoYearlySavingsDetailsDto": {
         "required": [
           "co2",
           "price"
