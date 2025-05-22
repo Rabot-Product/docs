@@ -3,31 +3,393 @@ title: 'Introduction'
 description: 'Example section for showcasing API endpoints'
 ---
 
-<Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
-</Note>
+## Introduction
 
-## Welcome
+The RABOT Partner API allows you to integrate with the RABOT platform to automate your process flows. It is designed for backend, server-to-server integration supporting the following use cases
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+* Getting price quotes and managing customer orders (submit, check status) for Sales Partners
 
-<Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
+* Accessing customer, contract and pricing / consumption data for integrating into 3rd party applications
+
+* Price dependent optimization of customer assets and energy consumption
+
+
+## Access to the API
+
+### Partner setup
+
+To use the API, your organization has to be set up as a partner in the RABOT platform. As part of this setup process, you receive a set of **client credentials** (client id, client password) that allow you to perform requests against the API. The client credentials also define the level of access you have, depending on the agreed use case and commercial and legal agreement in place.
+
+> 
+> Make sure to always keep your client credentials safe. Do not include client credentials in client side code (smartphone app, web application), as they could easily be extracted and misused. If you think your credentials have been compromised, contact RABOT to invalidate the credentials and get a new password.
 >
-  View the OpenAPI specification file
-</Card>
 
-## Authentication
+For development and testing purposes, the API is also available in a test environment, where you can create and modify data without triggering actual contract and grid operation processes. To access the test enviroment, you have to use different hostnames for your API request. Note that also your client credentials a different between test environment and production enviroment.
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
+| API | Test environment | Production environment |
+| ---------------- | --------------------------------- | ------------------------------ |
+| Authentication server | `test-auth.rabot-charge.de` | `auth.rabot-charge.de` |
+| API server | `test-api.rabot-charge.de` | `api.rabot-charge.de` |
+
+### Authentication
+
+The RABOT Partner API uses OAuth 2.0 for authentication (see [RFC 7649](https://www.rfc-editor.org/rfc/rfc6749)). Using the OAuth client credentials flow, you can obtain an access token from the RABOT authentication server.
+
+#### Token request
+
+```shell
+curl -L "auth.rabot-charge.de/connect/token" \
+-H "Content-Type: application/x-www-form-urlencoded" \
+-d "client_id={{CLIENT_ID}}" \
+-d "client_secret={{CLIENT_SECRET}}" \
+-d "grant_type=client_credentials" \
+-d "scope=api:partner"
+```
+
+You need to specify, which scopes you want to include in the token by specifying them in `scope` parameter.
+
+Following scopes are available:
+
+| Scope            | Description                                                     |
+| ---------------- | --------------------------------------------------------------- |
+| `api:partner`    | permission to access Partner API, required for all API requests |
+| `create:orders`  | permission to create orders                                     | 
+
+
+> To use scopes, you need to have them assigned to your API client by RABOT administrators.
+> If you feel you should have a scope, that you don't have, please contact our B2B support team.
+
+#### Token response
+
+If successful, the authentication server responds with a HTTP/200 status code, and the response body contains a structure with the access token
 
 ```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
+{
+  "access_token": "eyJhbGciOiJS....QnkY36d_ac",
+  "token_type": "Bearer",
+  "expires_in": 3599
+}
 ```
+
+In all requests to the partner API, include the access token as Bearer token in the HTTP authorization header. Note that the token only has a limited life time; when the life time has expired, you will need to request a new token from the authentication server.
+
+#### Example request
+
+```shell
+curl -L "https://api.rabot-charge.de/partners/v1/tariffs" \
+-H "Authorization: Bearer eyJhbGciOiJS....QnkY36d_ac"
+```
+
+
+## Managing orders via the API
+
+As a RABOT sales partner, the API allows you to build your own custom sales funnel for RABOT products (energy tariffs) or to integrate the price quote and order process into your own systems.
+
+Note that to build a sales process for RABOT energy tariffs that is compliant to the regulations, many requirements have to be fulfilled that are not part of this documentation. This documentation only covers the technical integration.
+
+### Creating a price quote
+
+To create a price quote for a prospect customer, you need to select a tariff, and provide some basic information about the prospect, such as:
+
+* postcode of the delivery address
+* expected yearly energy consumption
+
+With this information, you can call the tariff calculation endpoint `POST /partner/v1/tariffs/{tariffkey}/calculation`
+
+This endpoint returns a response that details the different pricing components both on a monthly base and depending on the consumption, as well as the contract conditions (minimum duration, cancellation period).
+
+### Submitting an order
+
+When a customer has accepted the offer, you can use the API to submit the customer and order details to the RABOT platform with a `POST /partner/v1/orders` call
+
+For the order, you have to provide the following information (see API reference for all the details):
+
+* a `tariffKey` to identify the requested product
+* customer identification, contact details and initial password.
+* delivery address and meter identification
+* information about previous supplier, desired change date and expected yearly consumption
+* bank details (for SEPA mandate)
+
+If successful, the API returns a customer number and contract number, which uniquely identify the customer and order in the RABOT platform, and can be used in subsequent API calls, e.g. to check the status of the order processing
+
+Before submitting the order via the API, you need to ensure that customers have received all the required contract and pricing information, have accepted the terms and conditions (AGB), have confirmed the email address and have accepted the offer.
+
+Once the order is received by the RABOT platform, an order confirmation email will be sent out to the email address provided in the order.
+
+#### Managing user password
+
+If the customer email address submitted with the order does not exist in the RABOT platform yet, a new user account is automatically created. If you provide a user password in the API call, this password will be used, and the customer will be able to log into RABOT user interfaces (web portal or mobile app) using email address and password.
+
+If no password is provided in the API call, the user account will be created with a random password, and the customer would need to go through a "forget password" flow to chose a new password.
+
+### Checking order status
+
+After the order has been submitted successfully, you can use the `GET /partner/v1/orders` API endpoint to follow the different processing states of the order.
+
+An order can have one of the following states:
+
+| Order status    | Description                                                  |
+| --------------- | ------------------------------------------------------------ |
+| Open            | The order has been received, but is not being processed yet if required data is missing (e.g. missing meter number) |
+| Processing      | The order is being processed, communication with other market actors (grid operators, previous supplier) is ongoing. This can take a few days up to a couple of weeks depending on the actors involved |
+| Rejected        | The order has been denied, e.g. due to a negative credit check |
+| Revoked         | The customer has revoked the order                           |
+| PendingDelivery | The order has been processed, and a contract confirmation has been sent to the customer, including a date for start of delivery |
+| Delivery        | The supply contract is active and RABOT is delivering energy to the delivery location |
+| Cancelled       | A contract termination has been received and an end of delivery date has been set. This could either be due to a customer actively sending a termination request, or because a customer has chosen a new supplier, and the supplier has communicated the termination request via the market communication processes. |
+| Unspecified     | An unknown order state, indicating an error in the communcation with other market actors |
+
+## Customers and contracts
+
+The Partner API can provide access to customer and contract data. Depending on the partnership scope and agreed data privacy policies, the level of access can vary, and you might need to use the customer linking process to allow end users to grant you access to their data.
+
+### Customer linking process
+An end user can grant your application access to their data by an approval process similar to the OAuth access flow. This involves the following steps:
+
+* call `POST /partner/v1/customers/link` to receive an `authorizationUrl` link. 
+* send the user to this link in a Web view. 
+* The user will be asked to log in using the credentials they used when creating their energy supply contract. 
+* After login, the user will be asked to grant your application access to their personal and contract related data stored on the Rabot platform.
+* When the user approves, the web view will be redirected to the webpage defined by the `successUrl` parameter in the `POST /partner/v1/customers/link` call, and you will be able to access the users data via the API.
+
+> Note that the link returned by the API only has a limited validity of 10 minutes. If an end user tries to login using the link after the 10 minutes have expired, the login will fail, and you will have to create a new link again to re-start the process.
+
+#### Managing user reference Ids
+The API offers different ways for you to match customer data in the RABOT platform with the data in your own platform.
+
+1. You can add a parameter `externalId` to the `POST /partner/v1/customers/link` call. This information is then stored with the customer data in the RABOT platform, and returned as part of the customer data in the `GET /partner/v1/customers` endpoint.
+
+2. In addition, when the user is redirected after granting your application access to their data, the `successUrl` link is extended with a query parameter `customerNo` that will contain the unique customer number of this customer in the RABOT platform. 
+
+### Contract information
+Via the API, you can also get access to data about the indidvidual contracts of a customer. Note that a single customer can have multiple contracts.
+
+Every contract initially starts as an order, received either via the web funnel or the API (see [Managing orders](#managing-orders-via-the-api)). Only after the order has been confirmed, and an order confirmation has been sent out to the user, is the order changed to a contract, and visible via the respective endpoint in the API.
+
+## Contract metrics
+The contract metrics endpoint provides access to pricing and consumption information related to a specific contract. This can be actual recorded data (e.g. consumption values as reported by a Smart Meter) or forecasted data (e.g. consumption data for SLP customers, or day-ahead price energy pricing).
+
+### MetricType
+You can select the type of information that you want to retrieve by specifying the appropriate `MetricType`:
+
+| MetricType | Description |
+| ---- | --- |
+| `Consumption` | The energy consumed during the selected period (in kWh). Can be either measured or estimated. |
+| `WorkingPrice` | The estimated average working price (EUR/kWh) in the selected period, including all fees and taxes.|
+| `TotalCost` | The total energy cost in the selected period, including all fees and taxes. If the selected period is smaller than a month, the applicable monthly fees will be pro-rated to the period.|
+| `Saving` | The monetary savings (in EUR) in the selected period, compared to the local default supplier's tariff pricing.|
+| `Co2Saving` | The savings in carbon emissions, commpared to the german energy grid mix.|
+
+> Note that for `WorkingPrice` and `TotalCost` metrics, the values returned by this API endpoint might not match the amounts reflected on the customers invoice.   
+> This is due to the fact that some price conditions or discounts are only calculated on a monthly level. For example a working price cap is only applied when creating the monthly invoice, so the API might return a higher monthly average working price than what is shown on the invoice.
+
+### ValueType
+
+You can use the `ValueType` request parameter to define if you want to only receive recorded data or forecasted data, or both:
+
+| ValueType | Description |
+| - | - |
+| `Actual` | return only data based on measurements, e.g. energy consumption reported by the DSO |
+| `Forecast` | return only data based on estimations, e.g. consumption estimated based on standard load profiles (SLP), not confirmed by actual meter reading yet | 
+| `Dynamic` | return either actual or forecasted data for the whole period, but not mixed | 
+| `Combined` | return either actual or forecasted data. E.g. when querying data for a month on daily level, for some days the API might returned actual data, while for other days might return forecasted data, based on data availability |
+
+### Periods and Intervals
+
+The API allows to retrieve data in different granularity, from to 15 minute intervals, up to aggregation on monthly or yearly level. Use the `interval` parameter to select the aggregation level.
+To limit the size of the result set, depening on the selected `interval`, you can only query a limited time period:
+
+| interval | maximum period |
+| - | - |
+| `QuarteryHourly` | 1 day |
+| `Hourly` | 3 days |
+| `Daily` | 2 months |
+| `Weekly` | 1 year |
+| `Monthly` | 15 years |
+| `Yearly` | 50 years |
+
+If you try to request a longer period, the API will return an `HTTP 400` error.
+
+### Example - 15-min consumption for Smart Meter 
+
+For contracts that are linked to a Smart Meter, the RABOT platform typically receives the measured consumption values in 15 minutes intervals on the following day. You can use the API to retrieve this information e.g. to display a detailed consumption graph the the user.
+
+Request:
+```shell
+curl -L "https://api.rabot-charge.de/partner/v1/customers/87678631/contracts/26765215/metrics?period.from=2025-03-01&period.to=2025-03-02&interval=QuarterHourly&metricType=Consumption&valueType=Actual" \
+-H "Authorization: ••••••"
+```
+
+Response:
+```json
+{
+    "data": {
+        "valueUnitInfo": "in kWh",
+        "consideredDataPeriod": {
+            "from": "2025-03-01 00:00:00",
+            "to": "2025-03-02 00:00:00"
+        },
+        "metricType": "Consumption",
+        "valueType": "Actual",
+        "interval": "QuarterHourly",
+        "intervalDuration": 96.0000,
+        "averageValuePerInterval": 0.6148,
+        "totalValue": 59.0165,
+        "numberOfEntries": 96,
+        "records": [
+            {
+                "moment": "2025-03-01 00:00:00",
+                "value": 0.3619,
+                "valueRelevanceType": "Actual"
+            },
+            {
+                "moment": "2025-03-01 00:15:00",
+                "value": 0.3486,
+                "valueRelevanceType": "Actual"
+            },
+            {
+                "moment": "2025-03-01 00:30:00",
+                "value": 0.3369,
+                "valueRelevanceType": "Actual"
+            },
+...
+            {
+                "moment": "2025-03-01 23:30:00",
+                "value": 0.5152,
+                "valueRelevanceType": "Actual"
+            },
+            {
+                "moment": "2025-03-01 23:45:00",
+                "value": 0.4810,
+                "valueRelevanceType": "Actual"
+            }
+        ]
+    },
+    "isSuccess": true,
+    "message": null,
+    "error": null
+}
+```
+
+### Example - Daily energy cost
+
+You can easily retrieve the daily energy cost for any contract using the metrics API endpoint:
+
+Request:
+```shell
+curl -L "https://api.rabot-charge.de/partner/v1/customers/87678631/contracts/26765215/metrics?period.from=2025-03-01&period.to=2025-04-01&interval=Daily&metricType=TotalCost&valueType=Combined" \
+-H "Authorization: ••••••" 
+``` 
+
+Response:
+```json
+{
+    "data": {
+        "valueUnitInfo": "in Euro",
+        "consideredDataPeriod": {
+            "from": "2025-03-01 00:00:00",
+            "to": "2025-04-01 00:00:00"
+        },
+        "metricType": "TotalCost",
+        "valueType": "Combined",
+        "interval": "Daily",
+        "intervalDuration": 30.9583,
+        "averageValuePerInterval": 16.8718,
+        "totalValue": 522.3232,
+        "numberOfEntries": 31,
+        "records": [
+            {
+                "moment": "2025-03-01 00:00:00",
+                "value": 22.5213,
+                "valueRelevanceType": "Actual"
+            },
+            {
+                "moment": "2025-03-02 00:00:00",
+                "value": 18.2885,
+                "valueRelevanceType": "Actual"
+            },
+...
+            {
+                "moment": "2025-03-30 00:00:00",
+                "value": 6.6829,
+                "valueRelevanceType": "Forecast"
+            },
+            {
+                "moment": "2025-03-31 00:00:00",
+                "value": 9.8037,
+                "valueRelevanceType": "Forecast"
+            }
+        ]
+    },
+    "isSuccess": true,
+    "message": null,
+    "error": null
+}
+```
+
+### Example - Day-Ahead pricing
+
+The metrics endpoint can also be used to get the future energy cost based on the Day Ahead market prices, and including all other fixed and variable fees and taxes. 
+
+Request:
+```shell
+curl -L "https://api.rabot-charge.de/partner/v1/customers/87678631/contracts/26765215/metrics?period.from=2025-05-05&period.to=2025-05-06&interval=Hourly&metricType=WorkingPrice&valueType=Combined" \
+-H "Authorization: ••••••"
+```
+
+Response
+```json
+{
+    "data": {
+        "valueUnitInfo": "in Cent/kWh",
+        "consideredDataPeriod": {
+            "from": "2025-05-05 00:00:00",
+            "to": "2025-05-06 00:00:00"
+        },
+        "metricType": "WorkingPrice",
+        "valueType": "Combined",
+        "interval": "Hourly",
+        "intervalDuration": 24.0000,
+        "averageValuePerInterval": 32.5362,
+        "totalValue": 780.8697,
+        "numberOfEntries": 24,
+        "records": [
+            {
+                "moment": "2025-05-05 00:00:00",
+                "value": 31.0816,
+                "valueRelevanceType": "Forecast"
+            },
+            {
+                "moment": "2025-05-05 01:00:00",
+                "value": 30.5259,
+                "valueRelevanceType": "Forecast"
+            },
+            {
+                "moment": "2025-05-05 02:00:00",
+                "value": 30.7329,
+                "valueRelevanceType": "Forecast"
+            },
+            {
+                "moment": "2025-05-05 03:00:00",
+                "value": 31.0780,
+                "valueRelevanceType": "Forecast"
+            },
+...
+            {
+                "moment": "2025-05-05 22:00:00",
+                "value": 34.2161,
+                "valueRelevanceType": "Forecast"
+            },
+            {
+                "moment": "2025-05-05 23:00:00",
+                "value": 33.3759,
+                "valueRelevanceType": "Forecast"
+            }
+        ]
+    },
+    "isSuccess": true,
+    "message": null,
+    "error": null
+}
+```
+
