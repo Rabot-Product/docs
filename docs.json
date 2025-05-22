@@ -45,10 +45,10 @@
           },
           {
             "group": "Endpoint Examples",
-            "pages": [
-              "api-reference/orders",
-              "api-reference/customers"
-            ]
+            "openapi": {
+              "source": "openapi.json",
+              "directory": "api-reference"
+            }
           }
         ]
       }
