@@ -46,7 +46,8 @@
           {
             "group": "Endpoint Examples",
             "pages": [
-              "api-reference/orders"
+              "api-reference/orders",
+              "api-reference/customers"
             ]
           }
         ]
