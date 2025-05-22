@@ -53,7 +53,7 @@
           {
             "group": "OpenAPI endpoints",
             "openapi": {
-              "source": "api-reference/openapi.json",
+              "source": "openapi.json",
               "directory": "api-reference"
             }
           }
