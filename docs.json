@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
+  "theme": "maple",
   "name": "RABOT Partner API",
   "colors": {
     "primary": "#05D282",
@@ -74,8 +74,8 @@
     }
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/logo/rabot-light.svg",
+    "dark": "/logo/rabot-dark.svg"
   },
   "navbar": {
     "links": [
