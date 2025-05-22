@@ -2,7 +2,7 @@
   "openapi": "3.0.4",
   "info": {
     "title": "RABOT Partner API",
-    "description": "",
+    "description": "Test",
     "version": "v1"
   },
   "paths": {
