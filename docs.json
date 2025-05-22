@@ -49,10 +49,6 @@
               "api-reference/orders",
               "api-reference/customers"
             ]
-          },
-          {
-            "group": "OpenAPI endpoints",
-            "openapi": "openapi.json"
           }
         ]
       }
