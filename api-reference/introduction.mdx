@@ -53,8 +53,8 @@ Following scopes are available:
 | `create:orders` | permission to create orders                                     |
 
 <Info>
-   To use scopes, you need to have them assigned to your API client by RABOT administrators. If you feel you should have a scope, that you don't have, please contact our B2B support team.
- </Info>
+  To use scopes, you need to have them assigned to your API client by RABOT administrators. If you feel you should have a scope, that you don't have, please contact our B2B support team.
+</Info>
 
 #### Token response
 
@@ -146,7 +146,12 @@ An end user can grant your application access to their data by an approval proce
 - call `POST /partner/v1/customers/link` to receive an `authorizationUrl` link.
 - send the user to this link in a Web view.
 - The user will be asked to log in using the credentials they used when creating their energy supply contract.
+
+![Customer Linking Login Pn](/images/customer-linking-login.png)
+
 - After login, the user will be asked to grant your application access to their personal and contract related data stored on the Rabot platform.
+
+  ![Customer Linking Authorize Pn](/images/customer-linking-authorize.png)
 - When the user approves, the web view will be redirected to the webpage defined by the `successUrl` parameter in the `POST /partner/v1/customers/link` call, and you will be able to access the users data via the API.
 
 > Note that the link returned by the API only has a limited validity of 10 minutes. If an end user tries to login using the link after the 10 minutes have expired, the login will fail, and you will have to create a new link again to re-start the process.
