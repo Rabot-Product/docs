@@ -44,11 +44,8 @@
             ]
           },
           {
-            "group": "Endpoint Examples",
-            "pages": [
-              "api-reference/orders",
-              "api-reference/customers"
-            ]
+            "group": "Reference",
+            "openapi": "https://test-api.rabot-charge.de/partner/swagger/v1/swagger.json"
           }
         ]
       }
