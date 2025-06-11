@@ -1,145 +1,11 @@
 ---
-title: "Introduction"
-description: "Example section for showcasing API endpoints"
+title: 'Customers and Contracts'
 ---
 
-## Introduction
-
-The RABOT Partner API allows you to integrate with the RABOT platform to automate your process flows. It is designed for backend, server-to-server integration supporting the following use cases
-
-- Getting price quotes and managing customer orders (submit, check status) for Sales Partners
-- Accessing customer, contract and pricing / consumption data for integrating into 3rd party applications
-- Price dependent optimization of customer assets and energy consumption
-
-## Access to the API
-
-### Partner setup
-
-To use the API, your organization has to be set up as a partner in the RABOT platform. As part of this setup process, you receive a set of **client credentials** (client id, client password) that allow you to perform requests against the API. The client credentials also define the level of access you have, depending on the agreed use case and commercial and legal agreement in place.
-
-<Warning>
-  Make sure to always keep your client credentials safe. Do not include client credentials in client side code (smartphone app, web application), as they could easily be extracted and misused. If you think your credentials have been compromised, contact RABOT to invalidate the credentials and get a new password.
-</Warning>
-
-For development and testing purposes, the API is also available in a test environment, where you can create and modify data without triggering actual contract and grid operation processes. To access the test enviroment, you have to use different hostnames for your API request. Note that also your client credentials a different between test environment and production enviroment.
-
-| API                   | Test environment            | Production environment |
-| --------------------- | --------------------------- | ---------------------- |
-| Authentication server | `test-auth.rabot-charge.de` | `auth.rabot-charge.de` |
-| API server            | `test-api.rabot-charge.de`  | `api.rabot-charge.de`  |
-
-### Authentication
-
-The RABOT Partner API uses OAuth 2.0 for authentication (see [RFC 7649](https://www.rfc-editor.org/rfc/rfc6749)). Using the OAuth client credentials flow, you can obtain an access token from the RABOT authentication server.
-
-#### Token request
-
-```shell
-curl -L "auth.rabot-charge.de/connect/token" \
--H "Content-Type: application/x-www-form-urlencoded" \
--d "client_id={{CLIENT_ID}}" \
--d "client_secret={{CLIENT_SECRET}}" \
--d "grant_type=client_credentials" \
--d "scope=api:partner"
-```
-
-You need to specify, which scopes you want to include in the token by specifying them in `scope` parameter.
-
-Following scopes are available:
-
-| Scope           | Description                                                     |
-| --------------- | --------------------------------------------------------------- |
-| `api:partner`   | permission to access Partner API, required for all API requests |
-| `create:orders` | permission to create orders                                     |
-
-<Info>
-  To use scopes, you need to have them assigned to your API client by RABOT administrators. If you feel you should have a scope, that you don't have, please contact our B2B support team.
-</Info>
-
-#### Token response
-
-If successful, the authentication server responds with a HTTP/200 status code, and the response body contains a structure with the access token
-
-```json
-{
-  "access_token": "eyJhbGciOiJS....QnkY36d_ac",
-  "token_type": "Bearer",
-  "expires_in": 3599
-}
-```
-
-In all requests to the partner API, include the access token as Bearer token in the HTTP authorization header. Note that the token only has a limited life time; when the life time has expired, you will need to request a new token from the authentication server.
-
-#### Example request
-
-```shell
-curl -L "https://api.rabot-charge.de/partners/v1/tariffs" \
--H "Authorization: Bearer eyJhbGciOiJS....QnkY36d_ac"
-```
-
-## Managing orders via the API
-
-As a RABOT sales partner, the API allows you to build your own custom sales funnel for RABOT products (energy tariffs) or to integrate the price quote and order process into your own systems.
-
-Note that to build a sales process for RABOT energy tariffs that is compliant to the regulations, many requirements have to be fulfilled that are not part of this documentation. This documentation only covers the technical integration.
-
-### Creating a price quote
-
-To create a price quote for a prospect customer, you need to select a tariff, and provide some basic information about the prospect, such as:
-
-- postcode of the delivery address
-- expected yearly energy consumption
-
-With this information, you can call the tariff calculation endpoint `POST /partner/v1/tariffs/{tariffkey}/calculation`
-
-This endpoint returns a response that details the different pricing components both on a monthly base and depending on the consumption, as well as the contract conditions (minimum duration, cancellation period).
-
-### Submitting an order
-
-When a customer has accepted the offer, you can use the API to submit the customer and order details to the RABOT platform with a `POST /partner/v1/orders` call
-
-For the order, you have to provide the following information (see API reference for all the details):
-
-- a `tariffKey` to identify the requested product
-- customer identification, contact details and initial password.
-- delivery address and meter identification
-- information about previous supplier, desired change date and expected yearly consumption
-- bank details (for SEPA mandate)
-
-If successful, the API returns a customer number and contract number, which uniquely identify the customer and order in the RABOT platform, and can be used in subsequent API calls, e.g. to check the status of the order processing
-
-Before submitting the order via the API, you need to ensure that customers have received all the required contract and pricing information, have accepted the terms and conditions (AGB), have confirmed the email address and have accepted the offer.
-
-Once the order is received by the RABOT platform, an order confirmation email will be sent out to the email address provided in the order.
-
-#### Managing user password
-
-If the customer email address submitted with the order does not exist in the RABOT platform yet, a new user account is automatically created. If you provide a user password in the API call, this password will be used, and the customer will be able to log into RABOT user interfaces (web portal or mobile app) using email address and password.
-
-If no password is provided in the API call, the user account will be created with a random password, and the customer would need to go through a "forget password" flow to chose a new password.
-
-### Checking order status
-
-After the order has been submitted successfully, you can use the `GET /partner/v1/orders` API endpoint to follow the different processing states of the order.
-
-An order can have one of the following states:
-
-| Order status    | Description                                                                                                                                                                                                                                                                                                          |
-| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Open            | The order has been received, but is not being processed yet if required data is missing (e.g. missing meter number)                                                                                                                                                                                                  |
-| Processing      | The order is being processed, communication with other market actors (grid operators, previous supplier) is ongoing. This can take a few days up to a couple of weeks depending on the actors involved                                                                                                               |
-| Rejected        | The order has been denied, e.g. due to a negative credit check                                                                                                                                                                                                                                                       |
-| Revoked         | The customer has revoked the order                                                                                                                                                                                                                                                                                   |
-| PendingDelivery | The order has been processed, and a contract confirmation has been sent to the customer, including a date for start of delivery                                                                                                                                                                                      |
-| Delivery        | The supply contract is active and RABOT is delivering energy to the delivery location                                                                                                                                                                                                                                |
-| Cancelled       | A contract termination has been received and an end of delivery date has been set. This could either be due to a customer actively sending a termination request, or because a customer has chosen a new supplier, and the supplier has communicated the termination request via the market communication processes. |
-| Unspecified     | An unknown order state, indicating an error in the communcation with other market actors                                                                                                                                                                                                                             |
-
-## Customers and contracts
 
 The Partner API can provide access to customer and contract data. Depending on the partnership scope and agreed data privacy policies, the level of access can vary, and you might need to use the customer linking process to allow end users to grant you access to their data.
 
-### Customer linking process
+## Customer linking process
 
 An end user can grant your application access to their data by an approval process similar to the OAuth access flow. This involves the following steps:
 
@@ -156,14 +22,14 @@ An end user can grant your application access to their data by an approval proce
 
 > Note that the link returned by the API only has a limited validity of 10 minutes. If an end user tries to login using the link after the 10 minutes have expired, the login will fail, and you will have to create a new link again to re-start the process.
 
-#### Managing user reference Ids
+### Managing user reference Ids
 
 The API offers different ways for you to match customer data in the RABOT platform with the data in your own platform.
 
 1. You can add a parameter `externalId` to the `POST /partner/v1/customers/link` call. This information is then stored with the customer data in the RABOT platform, and returned as part of the customer data in the `GET /partner/v1/customers` endpoint.
 2. In addition, when the user is redirected after granting your application access to their data, the `successUrl` link is extended with a query parameter `customerNo` that will contain the unique customer number of this customer in the RABOT platform.
 
-### Contract information
+## Contract information
 
 Via the API, you can also get access to data about the indidvidual contracts of a customer. Note that a single customer can have multiple contracts.
 

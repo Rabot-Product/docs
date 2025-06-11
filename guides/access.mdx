@@ -1,0 +1,67 @@
+---
+title: "Access to the API"
+---
+
+## Partner setup
+
+To use the API, your organization has to be set up as a partner in the RABOT platform. As part of this setup process, you receive a set of **client credentials** (client id, client password) that allow you to perform requests against the API. The client credentials also define the level of access you have, depending on the agreed use case and commercial and legal agreement in place.
+
+<Warning>
+  Make sure to always keep your client credentials safe. Do not include client credentials in client side code (smartphone app, web application), as they could easily be extracted and misused. If you think your credentials have been compromised, contact RABOT to invalidate the credentials and get a new password.
+</Warning>
+
+For development and testing purposes, the API is also available in a test environment, where you can create and modify data without triggering actual contract and grid operation processes. To access the test enviroment, you have to use different hostnames for your API request. Note that also your client credentials a different between test environment and production enviroment.
+
+| API                   | Test environment            | Production environment |
+| --------------------- | --------------------------- | ---------------------- |
+| Authentication server | `test-auth.rabot-charge.de` | `auth.rabot-charge.de` |
+| API server            | `test-api.rabot-charge.de`  | `api.rabot-charge.de`  |
+
+## Authentication
+
+The RABOT Partner API uses OAuth 2.0 for authentication (see [RFC 7649](https://www.rfc-editor.org/rfc/rfc6749)). Using the OAuth client credentials flow, you can obtain an access token from the RABOT authentication server.
+
+### Token request
+
+```shell
+curl -L "auth.rabot-charge.de/connect/token" \
+-H "Content-Type: application/x-www-form-urlencoded" \
+-d "client_id={{CLIENT_ID}}" \
+-d "client_secret={{CLIENT_SECRET}}" \
+-d "grant_type=client_credentials" \
+-d "scope=api:partner"
+```
+
+You need to specify, which scopes you want to include in the token by specifying them in `scope` parameter.
+
+Following scopes are available:
+
+| Scope           | Description                                                     |
+| --------------- | --------------------------------------------------------------- |
+| `api:partner`   | permission to access Partner API, required for all API requests |
+| `create:orders` | permission to create orders                                     |
+
+<Info>
+  To use scopes, you need to have them assigned to your API client by RABOT administrators. If you feel you should have a scope, that you don't have, please contact our B2B support team.
+</Info>
+
+### Token response
+
+If successful, the authentication server responds with a HTTP/200 status code, and the response body contains a structure with the access token
+
+```json
+{
+  "access_token": "eyJhbGciOiJS....QnkY36d_ac",
+  "token_type": "Bearer",
+  "expires_in": 3599
+}
+```
+
+In all requests to the partner API, include the access token as Bearer token in the HTTP authorization header. Note that the token only has a limited life time; when the life time has expired, you will need to request a new token from the authentication server.
+
+### Example request
+
+```shell
+curl -L "https://api.rabot-charge.de/partners/v1/tariffs" \
+-H "Authorization: Bearer eyJhbGciOiJS....QnkY36d_ac"
+```

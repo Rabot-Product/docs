@@ -16,20 +16,15 @@
           {
             "group": "Get Started",
             "pages": [
-              "index",
-              "quickstart",
-              "development"
+              "guides/introduction",
+              "guides/access"
             ]
           },
           {
             "group": "Essentials",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/settings",
-              "essentials/navigation",
-              "essentials/reusable-snippets"
+              "guides/customers_contracts",
+              "guides/orders"
             ]
           }
         ]
@@ -38,26 +33,9 @@
         "tab": "API reference",
         "openapi": "https://test-api.rabot-charge.de/partner/swagger/v1/swagger.json"
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Community",
-          "href": "https://mintlify.com/community",
-          "icon": "slack"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
+    ]
+
+
   },
   "logo": {
     "light": "/logo/rabot-light.svg",
