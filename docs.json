@@ -36,18 +36,7 @@
       },
       {
         "tab": "API reference",
-      "groups": [
-          {
-            "group": "API Documentation",
-            "pages": [
-              "api-reference/introduction"
-            ]
-          },
-          {
-            "group": "Reference",
-            "openapi": "https://test-api.rabot-charge.de/partner/swagger/v1/swagger.json"
-          }
-        ]
+        "openapi": "https://test-api.rabot-charge.de/partner/swagger/v1/swagger.json"
       }
     ],
     "global": {
