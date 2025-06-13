@@ -11,7 +11,7 @@ If your application does not have full customer data access by default, you can 
 
 An end user can grant your application access to their data by an approval process similar to the OAuth access flow. This involves the following steps:
 
-- call `POST /partner/v1/customers/link` to receive an `authorizationUrl` link.
+- call [create customer link](api-reference/customers/create_link) to receive an `authorizationUrl` link.
 - send the user to this link in a Web view.
 - The user will be asked to log in using the credentials they used when creating their energy supply contract.
 
@@ -20,7 +20,7 @@ An end user can grant your application access to their data by an approval proce
 - After login, the user will be asked to grant your application access to their personal and contract related data stored on the Rabot platform.
 
   ![Customer Linking Authorize Pn](/images/customer-linking-authorize.png)
-- When the user approves, the web view will be redirected to the webpage defined by the `successUrl` parameter in the `POST /partner/v1/customers/link` call, and you will be able to access the users data via the API.
+- When the user approves, the web view will be redirected to the webpage defined by the `successUrl` parameter in the [create customer link](api-reference/customers/create_link) call, and you will be able to access the users data via the API.
 
 > Note that the link returned by the API only has a limited validity of 10 minutes. If an end user tries to login using the link after the 10 minutes have expired, the login will fail, and you will have to create a new link again to re-start the process.
 
@@ -28,7 +28,7 @@ An end user can grant your application access to their data by an approval proce
 
 The API offers different ways for you to match customer data in the RABOT platform with the data in your own platform.
 
-1. You can add a parameter `externalId` to the `POST /partner/v1/customers/link` call. This information is then stored with the customer data in the RABOT platform, and returned as part of the customer data in the `GET /partner/v1/customers` endpoint.
+1. You can add a parameter `externalId` to the [create customer link](api-reference/customers/create_link) call. This information is then stored with the customer data in the RABOT platform, and returned as part of the customer data in the [list customers](api-reference/customers/list_customers) endpoint.
 2. In addition, when the user is redirected after granting your application access to their data, the `successUrl` link is extended with a query parameter `customerNo` that will contain the unique customer number of this customer in the RABOT platform.
 
 ## Contract information
