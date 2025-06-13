@@ -23,7 +23,7 @@
      "defaults": "all"
    },
    "mdx": {
-     "server": "https://test-api.rabot-charge.de",
+     "server": "https://api.rabot-charge.de",
       "auth": {
         "method": "bearer"
       }
