@@ -3,7 +3,7 @@ title: 'Customers and Contracts'
 ---
 
 
-The Partner API can provide access to customer and contract data. Depending on the partnership scope and agreed data privacy policies, your API client will have a certain access scope assigned (see [Authentication](#authentication)), which controls the visibility of customer and contract information.
+The Partner API can provide access to customer and contract data. Depending on the partnership scope and agreed data privacy policies, your API client will have a certain access scope assigned (see [Authentication](/guides/access#authentication)), which controls the visibility of customer and contract information.
 
 If your application does not have full customer data access by default, you can always use the customer linking process described below to ask the user to grant full data access to your application.
 
@@ -39,7 +39,7 @@ Via the API, you can also get access to data about the indidvidual contracts of 
  `role:application`, `role:customer-support` or `role: finance-reporting` scope to access contract information.
 
 
-Every contract initially starts as an order, received either via the web funnel or the API (see [Managing orders](#managing-orders-via-the-api)). Only after the order has been confirmed, and an order confirmation has been sent out to the user, is the order changed to a contract, and visible via the respective endpoint in the API.
+Every contract initially starts as an order, received either via the web funnel or the API (see [Managing orders](/guides/orders)). Only after the order has been confirmed, and an order confirmation has been sent out to the user, is the order changed to a contract, and visible via the respective endpoint in the API.
 
 ## Contract metrics
 
