@@ -15,7 +15,6 @@
    "params": {
      "expanded": "all"
    },
-   
    "playground": {
      "display": "interactive"
    },
@@ -23,7 +22,12 @@
      "languages": ["curl", "python", "javascript"],
      "defaults": "all"
    },
-   "server": "https://test-api.rabot-charge.de"
+   "mdx": {
+     "server": "https://test-api.rabot-charge.de",
+      "auth": {
+        "method": "bearer"
+      }
+    }
  },
 
   "navigation": {
