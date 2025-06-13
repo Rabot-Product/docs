@@ -21,6 +21,8 @@ This endpoint returns a response that details the different pricing components b
 
 When a customer has accepted the offer, you can use the API to submit the customer and order details to the RABOT platform with a `POST /partner/v1/orders` call
 
+> A `create:orders` scope is required to use this endpoint
+
 For the order, you have to provide the following information (see API reference for all the details):
 
 - a `tariffKey` to identify the requested product

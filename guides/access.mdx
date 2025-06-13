@@ -34,12 +34,15 @@ curl -L "auth.rabot-charge.de/connect/token" \
 
 You need to specify, which scopes you want to include in the token by specifying them in `scope` parameter.
 
-Following scopes are available:
+The following scopes are available:
 
-| Scope           | Description                                                     |
-| --------------- | --------------------------------------------------------------- |
-| `api:partner`   | permission to access Partner API, required for all API requests |
-| `create:orders` | permission to create orders                                     |
+| Scope            | Description                                                     |
+| ---------------- | --------------------------------------------------------------- |
+| `api:partner`    | permission to access Partner API, required for all API requests |
+| `create:orders`  | permission to create orders                                     | 
+| `role:finance-reporting` | permission to access customer and contract data, limited to finance reporting related information |
+| `role:customer-support`| permission to access customer and contract data, limited to customer support related information (includes `role: finance-reporting`) |
+| `role:application` | permission to access all customer and contract data (includes `role: finance-reporting` and `role:customer-support` ) |
 
 <Info>
   To use scopes, you need to have them assigned to your API client by RABOT administrators. If you feel you should have a scope, that you don't have, please contact our B2B support team.

@@ -3,7 +3,9 @@ title: 'Customers and Contracts'
 ---
 
 
-The Partner API can provide access to customer and contract data. Depending on the partnership scope and agreed data privacy policies, the level of access can vary, and you might need to use the customer linking process to allow end users to grant you access to their data.
+The Partner API can provide access to customer and contract data. Depending on the partnership scope and agreed data privacy policies, your API client will have a certain access scope assigned (see [Authentication](#authentication)), which controls the visibility of customer and contract information.
+
+If your application does not have full customer data access by default, you can always use the customer linking process described below to ask the user to grant full data access to your application.
 
 ## Customer linking process
 
@@ -33,11 +35,18 @@ The API offers different ways for you to match customer data in the RABOT platfo
 
 Via the API, you can also get access to data about the indidvidual contracts of a customer. Note that a single customer can have multiple contracts.
 
+> Your application needs 
+ `role:application`, `role:customer-support` or `role: finance-reporting` scope to access contract information.
+
+
 Every contract initially starts as an order, received either via the web funnel or the API (see [Managing orders](#managing-orders-via-the-api)). Only after the order has been confirmed, and an order confirmation has been sent out to the user, is the order changed to a contract, and visible via the respective endpoint in the API.
 
 ## Contract metrics
 
 The contract metrics endpoint provides access to pricing and consumption information related to a specific contract. This can be actual recorded data (e.g. consumption values as reported by a Smart Meter) or forecasted data (e.g. consumption data for SLP customers, or day-ahead price energy pricing).
+
+> Your application needs 
+ `role:application` scope to access contract metrics.
 
 ### MetricType
 
