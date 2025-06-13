@@ -32,10 +32,25 @@
       {
         "tab": "API reference",
         "openapi": "https://test-api.rabot-charge.de/partner/swagger/v1/swagger.json",
-        "pages": [
-          "api-reference/orders",
-          "api-reference/customers"
+        "groups": [
+          {
+            "group": "Orders",
+            "pages": [
+              "api-reference/create_order",
+              "api-reference/list_orders",
+              "api-reference/get_order"
+            ]
+          },
+          {
+            "group": "Tariffs and Prices",
+            "pages": [
+              "api-reference/list_tariffs",
+              "api-reference/calculate_price",
+              "api-reference/day_ahead_prices"
+            ]
+          }
         ]
+
       }
     ]
 
