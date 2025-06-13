@@ -11,13 +11,19 @@
 
   
  "api": {
+   "openapi": "https://test-api.rabot-charge.de/partner/swagger/v1/swagger.json",
+   "params": {
+     "expanded": "all"
+   },
+   
    "playground": {
      "display": "interactive"
    },
    "examples": {
      "languages": ["curl", "python", "javascript"],
      "defaults": "all"
-   }
+   },
+   "server": "https://test-api.rabot-charge.de"
  },
 
   "navigation": {
@@ -43,7 +49,6 @@
       },
       {
         "tab": "API reference",
-        "openapi": "https://test-api.rabot-charge.de/partner/swagger/v1/swagger.json",
         "groups": [
           {
             "group": "Orders",
