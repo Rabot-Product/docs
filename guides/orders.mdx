@@ -13,13 +13,13 @@ To create a price quote for a prospect customer, you need to select a tariff, an
 - postcode of the delivery address
 - expected yearly energy consumption
 
-With this information, you can call the [offer calculation endpoint](api-reference/tariffs/calculate_price).
+With this information, you can call the [offer calculation endpoint](/api-reference/tariffs/calculate_price).
 
 This endpoint returns a response that details the different pricing components both on a monthly base and depending on the consumption, as well as the contract conditions (minimum duration, cancellation period).
 
 ## Submitting an order
 
-When a customer has accepted the offer, you can use the API to submit the customer and order details to the RABOT platform with a [create new order](api-reference/orders/create_order) call
+When a customer has accepted the offer, you can use the API to submit the customer and order details to the RABOT platform with a [create new order](/api-reference/orders/create_order) call
 
 > A `create:orders` scope is required to use this endpoint
 
@@ -45,7 +45,7 @@ If no password is provided in the API call, the user account will be created wit
 
 ## Checking order status
 
-After the order has been submitted successfully, you can use the [get order](api-reference/orders/get_orders) endpoint to follow the different processing states of the order.
+After the order has been submitted successfully, you can use the [get order](/api-reference/orders/get_orders) endpoint to follow the different processing states of the order.
 
 An order can have one of the following states:
 
