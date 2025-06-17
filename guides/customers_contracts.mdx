@@ -1,7 +1,6 @@
 ---
-title: 'Customers and Contracts'
+title: "Customers and Contracts"
 ---
-
 
 The Partner API can provide access to customer and contract data. Depending on the partnership scope and agreed data privacy policies, your API client will have a certain access scope assigned (see [Scopes](/guides/access#scopes)), which controls the visibility of customer and contract information.
 
@@ -35,20 +34,21 @@ The API offers different ways for you to match customer data in the RABOT platfo
 
 ## Contract information
 
-Via the API, you can also get access to data about the indidvidual contracts of a customer. Note that a single customer can have multiple contracts.
+Via the API, you can also get access to data about the [indidvidual contracts of a customer](/api-reference/customers/list_contracts). Note that a single customer can have multiple contracts.
 
-> Your application needs 
- `role:application`, `role:customer-support` or `role: finance-reporting` scope to access contract information.
-
+<Info>
+Your application needs `role:application`, `role:customer-support` or `role: finance-reporting` scope to access contract information.
+</Info>
 
 Every contract initially starts as an order, received either via the web funnel or the API (see [Managing orders](/guides/orders)). Only after the order has been confirmed, and an order confirmation has been sent out to the user, is the order changed to a contract, and visible via the respective endpoint in the API.
 
 ## Contract metrics
 
-The contract metrics endpoint provides access to pricing and consumption information related to a specific contract. This can be actual recorded data (e.g. consumption values as reported by a Smart Meter) or forecasted data (e.g. consumption data for SLP customers, or day-ahead price energy pricing).
+The [contract metrics endpoint](/api-reference/customers/get_contract_metrics) provides access to pricing and consumption information related to a specific contract. This can be actual recorded data (e.g. consumption values as reported by a Smart Meter) or forecasted data (e.g. consumption data for SLP customers, or day-ahead price energy pricing).
 
-> Your application needs 
- `role:application` scope to access contract metrics.
+<Info>
+Your application needs `role:application` scope to access contract metrics.
+</Info>
 
 ### MetricType
 
@@ -62,8 +62,10 @@ You can select the type of information that you want to retrieve by specifying t
 | `Saving`       | The monetary savings (in EUR) in the selected period, compared to the local default supplier's tariff pricing.                                                                           |
 | `Co2Saving`    | The savings in carbon emissions, commpared to the german energy grid mix.                                                                                                                |
 
-> Note that for `WorkingPrice` and `TotalCost` metrics, the values returned by this API endpoint might not match the amounts reflected on the customers invoice.\
-> This is due to the fact that some price conditions or discounts are only calculated on a monthly level. For example a working price cap is only applied when creating the monthly invoice, so the API might return a higher monthly average working price than what is shown on the invoice.
+<Info>
+Note that for `WorkingPrice` and `TotalCost` metrics, the values returned by this API endpoint might not match the amounts reflected on the customers invoice.\
+This is due to the fact that some price conditions or discounts are only calculated on a monthly level. For example a working price cap is only applied when creating the monthly invoice, so the API might return a higher monthly average working price than what is shown on the invoice.
+</Info>
 
 ### ValueType
 
@@ -96,16 +98,12 @@ If you try to request a longer period, the API will return an `HTTP 400` error.
 
 For contracts that are linked to a Smart Meter, the RABOT platform typically receives the measured consumption values in 15 minutes intervals on the following day. You can use the API to retrieve this information e.g. to display a detailed consumption graph the the user.
 
-Request:
-
-```shell
+```shell Request [expandable]
 curl -L "https://api.rabot-charge.de/partner/v1/customers/87678631/contracts/26765215/metrics?period.from=2025-03-01&period.to=2025-03-02&interval=QuarterHourly&metricType=Consumption&valueType=Actual" \
 -H "Authorization: ••••••"
 ```
 
-Response:
-
-```json
+```json Response [expandable]
 {
     "data": {
         "valueUnitInfo": "in kWh",
@@ -159,16 +157,12 @@ Response:
 
 You can easily retrieve the daily energy cost for any contract using the metrics API endpoint:
 
-Request:
-
-```shell
+```shell Request [expandable]
 curl -L "https://api.rabot-charge.de/partner/v1/customers/87678631/contracts/26765215/metrics?period.from=2025-03-01&period.to=2025-04-01&interval=Daily&metricType=TotalCost&valueType=Combined" \
 -H "Authorization: ••••••" 
 ```
 
-Response:
-
-```json
+```json Response [expandable]
 {
     "data": {
         "valueUnitInfo": "in Euro",
@@ -217,16 +211,12 @@ Response:
 
 The metrics endpoint can also be used to get the future energy cost based on the Day Ahead market prices, and including all other fixed and variable fees and taxes.
 
-Request:
-
-```shell
+```shell Request  [expandable]
 curl -L "https://api.rabot-charge.de/partner/v1/customers/87678631/contracts/26765215/metrics?period.from=2025-05-05&period.to=2025-05-06&interval=Hourly&metricType=WorkingPrice&valueType=Combined" \
 -H "Authorization: ••••••"
 ```
 
-Response
-
-```json
+```json Response [expandable]
 {
     "data": {
         "valueUnitInfo": "in Cent/kWh",
