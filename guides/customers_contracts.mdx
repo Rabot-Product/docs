@@ -19,7 +19,7 @@ An end user can grant your application access to their data by an approval proce
 - After login, the user will be asked to grant your application access to their personal and contract related data stored on the Rabot platform.
 
   ![Customer Linking Authorize Pn](/images/customer-linking-authorize.png)
-- When the user approves, the web view will be redirected to the webpage defined by the `successUrl` parameter in the [create customer link](api-reference/customers/create_customer_linking) call, and you will be able to access the users data via the API.
+- When the user approves, the web view will be redirected to the webpage defined by the `successUrl` parameter in the [create customer link](/api-reference/customers/create_customer_linking) call, and you will be able to access the users data via the API.
 
 <Info>
 Note that the link returned by the API only has a limited validity of 10 minutes. If an end user tries to login using the link after the 10 minutes have expired, the login will fail, and you will have to create a new link again to re-start the process.
@@ -98,7 +98,7 @@ If you try to request a longer period, the API will return an `HTTP 400` error.
 
 For contracts that are linked to a Smart Meter, the RABOT platform typically receives the measured consumption values in 15 minutes intervals on the following day. You can use the API to retrieve this information e.g. to display a detailed consumption graph the the user.
 
-```shell Request [expandable]
+```shell Request [wrap]
 curl -L "https://api.rabot-charge.de/partner/v1/customers/87678631/contracts/26765215/metrics?period.from=2025-03-01&period.to=2025-03-02&interval=QuarterHourly&metricType=Consumption&valueType=Actual" \
 -H "Authorization: ••••••"
 ```
@@ -157,7 +157,7 @@ curl -L "https://api.rabot-charge.de/partner/v1/customers/87678631/contracts/267
 
 You can easily retrieve the daily energy cost for any contract using the metrics API endpoint:
 
-```shell Request [expandable]
+```shell Request [wrap]
 curl -L "https://api.rabot-charge.de/partner/v1/customers/87678631/contracts/26765215/metrics?period.from=2025-03-01&period.to=2025-04-01&interval=Daily&metricType=TotalCost&valueType=Combined" \
 -H "Authorization: ••••••" 
 ```
@@ -211,7 +211,7 @@ curl -L "https://api.rabot-charge.de/partner/v1/customers/87678631/contracts/267
 
 The metrics endpoint can also be used to get the future energy cost based on the Day Ahead market prices, and including all other fixed and variable fees and taxes.
 
-```shell Request  [expandable]
+```shell Request  [wrap]
 curl -L "https://api.rabot-charge.de/partner/v1/customers/87678631/contracts/26765215/metrics?period.from=2025-05-05&period.to=2025-05-06&interval=Hourly&metricType=WorkingPrice&valueType=Combined" \
 -H "Authorization: ••••••"
 ```
