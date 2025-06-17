@@ -21,28 +21,9 @@ An end user can grant your application access to their data by an approval proce
   ![Customer Linking Authorize Pn](/images/customer-linking-authorize.png)
 - When the user approves, the web view will be redirected to the webpage defined by the `successUrl` parameter in the [create customer link](/api-reference/customers/create_customer_linking) call, and you will be able to access the users data via the API.
 
-```mermaid
-flowchart LR
-    subgraph subgraph1
-        direction TB
-        top1[top] --> bottom1[bottom]
-    end
-    subgraph subgraph2
-        direction TB
-        top2[top] --> bottom2[bottom]
-    end
-    %% ^ These subgraphs are identical, except for the links to them:
-
-    %% Link *to* subgraph1: subgraph1 direction is maintained
-    outside --> subgraph1
-    %% Link *within* subgraph2:
-    %% subgraph2 inherits the direction of the top-level graph (LR)
-    outside ---> top2
-```
-
-<Info>
+<Note>
 Note that the link returned by the API only has a limited validity of 10 minutes. If an end user tries to login using the link after the 10 minutes have expired, the login will fail, and you will have to create a new link again to re-start the process.
-</Info>
+</Note>
 
 ### Managing user reference Ids
 
@@ -55,9 +36,9 @@ The API offers different ways for you to match customer data in the RABOT platfo
 
 Via the API, you can also get access to data about the [indidvidual contracts of a customer](/api-reference/customers/list_contracts). Note that a single customer can have multiple contracts.
 
-<Info>
+<Note>
 Your application needs `role:application`, `role:customer-support` or `role: finance-reporting` scope to access contract information.
-</Info>
+</Note>
 
 Every contract initially starts as an order, received either via the web funnel or the API (see [Managing orders](/guides/orders)). Only after the order has been confirmed, and an order confirmation has been sent out to the user, is the order changed to a contract, and visible via the respective endpoint in the API.
 
@@ -65,9 +46,9 @@ Every contract initially starts as an order, received either via the web funnel 
 
 The [contract metrics endpoint](/api-reference/customers/get_contract_metrics) provides access to pricing and consumption information related to a specific contract. This can be actual recorded data (e.g. consumption values as reported by a Smart Meter) or forecasted data (e.g. consumption data for SLP customers, or day-ahead price energy pricing).
 
-<Info>
+<Note>
 Your application needs `role:application` scope to access contract metrics.
-</Info>
+</Note>
 
 ### MetricType
 
