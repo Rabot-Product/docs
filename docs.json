@@ -31,11 +31,13 @@
  },
 
   "navigation": {
-    "tabs": [
+    "anchors": [
       {
-          "tab": "Home",
-          "pages": ["/index"]
-      },
+        "anchor": "Home",
+        "pages": ["/index"]
+      }
+    ],
+    "tabs": [
       {
         "tab": "Guides",
         "groups": [
