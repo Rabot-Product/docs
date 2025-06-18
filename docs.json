@@ -33,6 +33,10 @@
   "navigation": {
     "tabs": [
       {
+          "tab": "Home",
+          "pages": ["/index"]
+      },
+      {
         "tab": "Guides",
         "groups": [
           {
@@ -43,7 +47,7 @@
             ]
           },
           {
-            "group": "Essentials",
+            "group": "Lear more",
             "pages": [
               "guides/customers_contracts",
               "guides/orders"
