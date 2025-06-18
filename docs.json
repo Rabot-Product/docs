@@ -35,11 +35,10 @@
       {
         "anchor": "Home",
         "pages": ["/index"]
-      }
-    ],
-    "tabs": [
+      },
+  
       {
-        "tab": "Guides",
+        "anchor": "Guides",
         "groups": [
           {
             "group": "Get Started",
@@ -58,7 +57,7 @@
         ]
       },
       {
-        "tab": "API reference",
+        "anchor": "API reference",
         "groups": [
           {
             "group": "Orders",
