@@ -59,22 +59,6 @@
         "tab": "API reference",
         "groups": [
           {
-            "group": "Orders",
-            "pages": [
-              "api-reference/orders/create_order",
-              "api-reference/orders/list_orders",
-              "api-reference/orders/get_order"
-            ]
-          },
-          {
-            "group": "Tariffs and Prices",
-            "pages": [
-              "api-reference/tariffs/list_tariffs",
-              "api-reference/tariffs/calculate_price",
-              "api-reference/day_ahead_prices"
-            ]
-          },
-          {
             "group": "Customers and Contracts",
             "pages": [
               "api-reference/customers/list_customers",
@@ -86,7 +70,23 @@
               "api-reference/customers/delete_customer_linking"
               
             ]
-          }         
+          },         
+          {
+            "group": "Tariffs and Prices",
+            "pages": [
+              "api-reference/tariffs/list_tariffs",
+              "api-reference/tariffs/calculate_price",
+              "api-reference/day_ahead_prices"
+            ]
+          },
+          {
+            "group": "Orders",
+            "pages": [
+              "api-reference/orders/create_order",
+              "api-reference/orders/list_orders",
+              "api-reference/orders/get_order"
+            ]
+          }
         ]
 
       }
