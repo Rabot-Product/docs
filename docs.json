@@ -31,14 +31,14 @@
  },
 
   "navigation": {
-    "anchors": [
+    "tabs": [
       {
-        "anchor": "Home",
+        "tab": "Home",
         "pages": ["/index"]
       },
   
       {
-        "anchor": "Guides",
+        "tab": "Guides",
         "groups": [
           {
             "group": "Get Started",
@@ -57,7 +57,7 @@
         ]
       },
       {
-        "anchor": "API reference",
+        "tab": "API reference",
         "groups": [
           {
             "group": "Orders",
