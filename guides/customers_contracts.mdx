@@ -62,10 +62,10 @@ You can select the type of information that you want to retrieve by specifying t
 | `Saving`       | The monetary savings (in EUR) in the selected period, compared to the local default supplier's tariff pricing.                                                                           |
 | `Co2Saving`    | The savings in carbon emissions, commpared to the german energy grid mix.                                                                                                                |
 
-<Info>
+<Note>
 Note that for `WorkingPrice` and `TotalCost` metrics, the values returned by this API endpoint might not match the amounts reflected on the customers invoice.\
 This is due to the fact that some price conditions or discounts are only calculated on a monthly level. For example a working price cap is only applied when creating the monthly invoice, so the API might return a higher monthly average working price than what is shown on the invoice.
-</Info>
+</Note>
 
 ### ValueType
 
