@@ -31,35 +31,29 @@
  },
 
   "navigation": {
-    "tabs": [
+    "groups": [
       {
-        "tab": "Home",
+        "group": "Start",
         "pages": ["/index"]
       },
-  
       {
-        "tab": "Guides",
-        "groups": [
-          {
-            "group": "Get Started",
-            "pages": [
-              "guides/partner_setup",
-              "guides/authentication",
-              "guides/pagination"
-            ]
-          },
-          {
-            "group": "Learn more",
-            "pages": [
-              "guides/customers_contracts",
-              "guides/orders"
-            ]
-          }
+        "group": "Get Started",
+        "pages": [
+          "guides/partner_setup",
+          "guides/authentication",
+          "guides/pagination"
         ]
       },
       {
-        "tab": "API reference",
-        "groups": [
+        "group": "Learn more",
+        "pages": [
+          "guides/customers_contracts",
+          "guides/orders"
+        ]
+      },
+      {
+        "group": "API reference",
+        "pages": [
           {
             "group": "Customers and Contracts",
             "pages": [
@@ -93,8 +87,6 @@
 
       }
     ]
-
-
   },
   "logo": {
     "light": "/logo/rabot-light.svg",
