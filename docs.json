@@ -33,7 +33,7 @@
   "navigation": {
     "groups": [
       {
-        "group": "Start",
+        "group": "Introduction",
         "pages": ["/index"]
       },
       {
@@ -45,7 +45,7 @@
         ]
       },
       {
-        "group": "Learn more",
+        "group": "Guides",
         "pages": [
           "guides/customers_contracts",
           "guides/orders"
