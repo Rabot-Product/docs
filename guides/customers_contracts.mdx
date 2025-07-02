@@ -22,7 +22,7 @@ An end user can grant your application access to their data by an approval proce
 - When the user approves, the web view will be redirected to the webpage defined by the `successUrl` parameter in the [create customer link](/api-reference/customers/create_customer_linking) call, and you will be able to access the users data via the API.
 
 <Note>
-Note that the link returned by the API only has a limited validity of 10 minutes. If an end user tries to login using the link after the 10 minutes have expired, the login will fail, and you will have to create a new link again to re-start the process.
+  Note that the link returned by the API only has a limited validity of 10 minutes. If an end user tries to login using the link after the 10 minutes have expired, the login will fail, and you will have to create a new link again to re-start the process.
 </Note>
 
 ### Managing user reference Ids
@@ -37,7 +37,7 @@ The API offers different ways for you to match customer data in the RABOT platfo
 Via the API, you can also get access to data about the [indidvidual contracts of a customer](/api-reference/customers/list_contracts). Note that a single customer can have multiple contracts.
 
 <Note>
-Your application needs `role:application`, `role:customer-support` or `role: finance-reporting` scope to access contract information.
+  Your application needs `role:application`, `role:customer-support` or `role: finance-reporting` scope to access contract information.
 </Note>
 
 Every contract initially starts as an order, received either via the web funnel or the API (see [Managing orders](/guides/orders)). Only after the order has been confirmed, and an order confirmation has been sent out to the user, is the order changed to a contract, and visible via the respective endpoint in the API.
@@ -47,7 +47,7 @@ Every contract initially starts as an order, received either via the web funnel 
 The [contract metrics endpoint](/api-reference/customers/get_contract_metrics) provides access to pricing and consumption information related to a specific contract. This can be actual recorded data (e.g. consumption values as reported by a Smart Meter) or forecasted data (e.g. consumption data for SLP customers, or day-ahead price energy pricing).
 
 <Note>
-Your application needs `role:application` scope to access contract metrics.
+  Your application needs `role:application` scope to access contract metrics.
 </Note>
 
 ### MetricType
@@ -63,8 +63,8 @@ You can select the type of information that you want to retrieve by specifying t
 | `Co2Saving`    | The savings in carbon emissions, commpared to the german energy grid mix.                                                                                                                |
 
 <Note>
-Note that for `WorkingPrice` and `TotalCost` metrics, the values returned by this API endpoint might not match the amounts reflected on the customers invoice.\
-This is due to the fact that some price conditions or discounts are only calculated on a monthly level. For example a working price cap is only applied when creating the monthly invoice, so the API might return a higher monthly average working price than what is shown on the invoice.
+  Note that for `WorkingPrice` and `TotalCost` metrics, the values returned by this API endpoint might not match the amounts reflected on the customers invoice.\
+  This is due to the fact that some price conditions or discounts are only calculated on a monthly level. For example a working price cap is only applied when creating the monthly invoice, so the API might return a higher monthly average working price than what is shown on the invoice.
 </Note>
 
 ### ValueType
@@ -83,14 +83,14 @@ You can use the `ValueType` request parameter to define if you want to only rece
 The API allows to retrieve data in different granularity, from to 15 minute intervals, up to aggregation on monthly or yearly level. Use the `interval` parameter to select the aggregation level.
 To limit the size of the result set, depening on the selected `interval`, you can only query a limited time period:
 
-| interval         | maximum period |
-| ---------------- | -------------- |
-| `QuarteryHourly` | 1 day          |
-| `Hourly`         | 3 days         |
-| `Daily`          | 2 months       |
-| `Weekly`         | 1 year         |
-| `Monthly`        | 15 years       |
-| `Yearly`         | 50 years       |
+| interval        | maximum period |
+| --------------- | -------------- |
+| `QuarterHourly` | 1 day          |
+| `Hourly`        | 3 days         |
+| `Daily`         | 2 months       |
+| `Weekly`        | 1 year         |
+| `Monthly`       | 15 years       |
+| `Yearly`        | 50 years       |
 
 If you try to request a longer period, the API will return an `HTTP 400` error.
 
