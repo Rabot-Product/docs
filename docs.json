@@ -43,7 +43,8 @@
           {
             "group": "Get Started",
             "pages": [
-              "guides/access"
+              "guides/partner_setup",
+              "guides/authentication"
             ]
           },
           {
