@@ -1,0 +1,10 @@
+---
+title: "Pagination"
+---
+
+Some API endpoints can potentially return large sets of data. e.g. the [list orders](/api-reference/orders/get_order) or the [list customers](/api-reference/orders/list_customers) endpoints.
+Requesting the complete data set in one request can cause performance problems, so the API offers offset-based pagination to request data in more manageable chunks. You can use the query parameters `offset` and `limit` to request a certain part of the data. E.g. 
+
+`GET /partner/v1/customers?offset=0&limit=50`  returns the first 50 records
+
+`GET /partner/v1/customers?offset=50&limit=50`  returns the next 50 records

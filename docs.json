@@ -44,7 +44,8 @@
             "group": "Get Started",
             "pages": [
               "guides/partner_setup",
-              "guides/authentication"
+              "guides/authentication",
+              "guides/pagination"
             ]
           },
           {
