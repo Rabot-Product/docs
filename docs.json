@@ -16,7 +16,7 @@
      "expanded": "all"
    },
    "playground": {
-     "display": "interactive"
+     "display": "simple"
    },
    "examples": {
      "languages": ["curl", "python", "javascript"],
