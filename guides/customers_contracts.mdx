@@ -95,7 +95,7 @@ If you try to request a longer period, the API will return an `HTTP 400` error.
 
 ### Example - 15-min consumption for Smart Meter
 
-For contracts that are linked to a Smart Meter, the RABOT platform typically receives the measured consumption values in 15 minutes intervals on the following day. You can use the API to retrieve this information e.g. to display a detailed consumption graph the the user.
+For contracts that are linked to a Smart Meter, the RABOT platform typically receives the measured consumption values in 15 minutes intervals on the following day. You can use the API to retrieve this information e.g. to display a detailed consumption graph to the user.
 
 ```shell Request
 curl -L "https://api.rabot-charge.de/partner/v1/customers/87678631/contracts/26765215/metrics?period.from=2025-03-01&period.to=2025-03-02&interval=QuarterHourly&metricType=Consumption&valueType=Actual" \

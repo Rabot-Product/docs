@@ -1,7 +1,7 @@
 ---
 title: "Download document"
-openapi: "GET /partner/v1/customers/{customerNumber}/contracts/{contractNumber}/documents"
+openapi: "GET /partner/v1/customers/{customerNumber}/contracts/{contractNumber}/documents/{fileId}"
 description: "Download a single document related to a given contract"
 ---
 
-The endpoint allows you to download a document, such as a settlement invoice.
+The endpoint allows you to download a document, such as a settlement invoice. Use the [list contract documents](/api-reference/list_contract_documents) endpoint to find the relevant `fileId needed for this API call.
