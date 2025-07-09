@@ -1,6 +1,49 @@
 ---
-title: 'Create new order'
+title: "Create new order"
 openapi: "POST /partner/v1/orders"
-description: 'Create a new order'
+description: "Create a new order"
 ---
 
+You can use this endpoint to create a new order.
+
+## Required input
+
+The following information is mandatory in all cases to successfully create an order:
+
+- a valid `tariffKey` (see [list tariffs](/api-reference/tariffs/list_tariffs))
+- customer information in `useraccount`:
+  - `firstName` and `lastName` for private customers, `businessName` for business customers.
+  - a validated email address of the customer
+- the `deliveryAddress` object with
+  - `firstName` and `lastName` for private customers, `businessName` for business customers.
+  - complete postal address of the delivery location
+- `bankDetails` need to be complete with `accountHolder`, `iban`, `bic` and `bankName` for SEPA. Set `bankDetails: null` for payment by invoice
+- `deliveryDetails` has to filled with
+  - `maLoIdentifier` or `meterNumber` of the delivery point
+  - the BDEW code of the previous supplier in `previousSupplierCode` 
+
+### Use case: New delivery location
+
+If the customer just moved into the location, i.e. has no previous supply contract for the delivery location:
+
+- `contractReason` has to be set to `NewDeliveryLocation`
+- `deliveryDetails` has to filled with
+  - `moveInDate` set to the date the customer will move into the new location. This will be used as desired start date for the contract
+  - `previousAnnualConsumption` has to be filled and set to the expected annual energy consumption.
+
+### Use case: Supplier change
+
+If the customer already has a supply contract in the delivery location:
+
+- `contractReason` has to be set to `ChangeOfSupplier`
+- The name in `deliveryAddress` has to match with the contract holder of the previous supply contract
+- `deliveryDetails` has to filled with
+  - `previousAnnualConsumption` has to be filled and set to the annual energy consumption as reported by the previous supplier
+  - If the customer has already cancelled the contract with the previous supplier
+    - `previousSelfCancelledDate` has to be filled
+  - If the customer wants Rabot to take care of cancelling the contract with the previous supplier:
+    - `desiredTransitionDate`has to be filled
+
+<Note>
+  Requires `create:orders` scope.
+</Note>

@@ -5,3 +5,7 @@ description: "Download a single document related to a given contract"
 ---
 
 The endpoint allows you to download a document, such as a settlement invoice. Use the [get contract documents](/api-reference/customers/list_contract_documents) endpoint to find the relevant `fileId` needed for this API call.
+
+<Note>
+  Requires `role:application` scope or `Linked` relation on customer level.
+</Note>

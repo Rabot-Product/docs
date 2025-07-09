@@ -7,3 +7,7 @@ description: 'Returns the list of contracts for a given customer'
 This endpoint allows you to retrieve all contracts for a particular customer. A contract is only listed here after it has been confirmed, i.e. the contract confirmation has been sent out to the customer and a date for the start of delivery has been set.
 
 By default, the API returns only the first 10 records. Use `offset` and `limit` request parameters for [paging](/guides/pagination).
+
+<Note>
+ Requires `role:application`, `role:customer-support` or `role: finance-reporting` scope or `Linked` relation on customer level.
+</Note>
