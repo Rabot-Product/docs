@@ -3,3 +3,10 @@ title: "Contract cost details"
 description: "Get detailed cost component breakdown for a given contract"
 openapi: "GET /partner/v1/customers/{customerNumber}/contracts/{contractNumber}/costs"
 ---
+
+Use this endpoint to retrieve detailed information about the cost components applicable for a specific contract.
+This allows your application to show a cost breakdown to the end user, providing insight about which costs are related to grid fees and other taxes and levies, and which costs are related to the cost of energy procurement. 
+
+<Note>
+  Requires `role:application` scope or `Linked` relation on customer level.
+</Note>

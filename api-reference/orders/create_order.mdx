@@ -20,7 +20,7 @@ The following information is mandatory in all cases to successfully create an or
 - `bankDetails` need to be complete with `accountHolder`, `iban`, `bic` and `bankName` for SEPA. Set `bankDetails: null` for payment by invoice
 - `deliveryDetails` has to filled with
   - `maLoIdentifier` or `meterNumber` of the delivery point
-  - the BDEW code of the previous supplier in `previousSupplierCode` 
+  - the BDEW code of the previous supplier in `previousSupplierCode`
 
 ### Use case: New delivery location
 
@@ -40,7 +40,7 @@ If the customer already has a supply contract in the delivery location:
 - `deliveryDetails` has to filled with
   - `previousAnnualConsumption` has to be filled and set to the annual energy consumption as reported by the previous supplier
   - If the customer has already cancelled the contract with the previous supplier
-    - `previousSelfCancelledDate` has to be filled
+    - `previousSelfCancelledDate` has to be filled. This will be used as desired start date for the new contract
   - If the customer wants Rabot to take care of cancelling the contract with the previous supplier:
     - `desiredTransitionDate`has to be filled
 

@@ -3,8 +3,31 @@ title: "Pagination"
 ---
 
 Some API endpoints can potentially return large sets of data. e.g. the [list orders](/api-reference/orders/list_orders) or the [list customers](/api-reference/customers/list_customers) endpoints.
-Requesting the complete data set in one request can cause performance problems, so the API offers offset-based pagination to request data in more manageable chunks. You can use the query parameters `offset` and `limit` to request a certain part of the data. E.g. 
+Requesting the complete data set in one request can cause performance problems, so the API offers offset-based pagination to request data in more manageable chunks. You can use the query parameters `offset` and `limit` to request a certain part of the data. E.g.
 
-`GET /partner/v1/customers?offset=0&limit=50`  returns the first 50 records
+`GET /partner/v1/customers?offset=0&limit=10`  returns the first 10 records
 
-`GET /partner/v1/customers?offset=50&limit=50`  returns the next 50 records
+`GET /partner/v1/customers?offset=10&limit=10`  returns the next 10 records
+
+In the response, the API returns a `count `parameter that shows the number of records included the response, and a `hasMoreItems `flag that indicates whether there are more records in the list, so that your application can determine whether to issue another call to request the remaining records or whether it reached the end of the list.
+
+```json
+{
+    "count": 10,
+    "hasMoreItems": true,
+    "data": [
+        {
+            "customerNumber": "8432478",
+            "externalIdentifier": null,
+            "firstName": "Erika",
+            "lastName": "Mustermann",
+            "businessName": null,
+            "emailAddress": "erika@mustermann.de",
+            "relations": [
+                "Owner"
+            ]
+        },
+        {
+            "customerNumber": "5151465",
+            "externalIdentifier": null,
+```
