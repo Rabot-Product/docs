@@ -81,6 +81,7 @@
               "api-reference/orders/create_order",
               "api-reference/orders/list_orders",
               "api-reference/orders/get_order"
+              "api-reference/schemas/contract_states"
             ]
           }
         ]
