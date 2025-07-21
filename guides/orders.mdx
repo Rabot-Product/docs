@@ -6,58 +6,58 @@ As a RABOT sales partner, the API allows you to build your own custom sales funn
 
 Note that, to build a sales process for RABOT energy tariffs that is compliant to the regulations, many requirements have to be fulfilled that are not part of this documentation. This documentation only covers the technical integration.
 
-## Creating a price quote
-
-To create a price quote for a prospect customer, you need to select a tariff, and provide some basic information about the prospect, such as:
-
-- postcode of the delivery address
-- expected yearly energy consumption
-
-With this information, you can call the [offer calculation endpoint](/api-reference/tariffs/calculate_price).
-
-This endpoint returns a response that details the different pricing components both on a monthly base and depending on the consumption, as well as the contract conditions (minimum duration, cancellation period).
-
-## Submitting an order
-
-When a customer has accepted the offer, you can use the API to submit the customer and order details to the RABOT platform with a [create new order](/api-reference/orders/create_order) call
-
 <Note>
   A `create:orders` scope is required to use this endpoint
 </Note>
 
-For the order, you have to provide the following information (see API reference for all the details):
+<Steps>
+  <Step title="Create a price quote" titleSize="h3">
+    To create a price quote for a prospect, you need to select a tariff, and provide some basic information about the prospect, such as:
 
-- a `tariffKey` to identify the requested product
-- customer identification, contact details and initial password.
-- delivery address and meter identification
-- information about previous supplier, desired change date and expected yearly consumption
-- bank details (for SEPA mandate)
+    - postcode of the delivery address
+    - expected yearly energy consumption
 
-If successful, the API returns a customer number and contract number, which uniquely identify the customer and order in the RABOT platform, and can be used in subsequent API calls, e.g. to check the status of the order processing
+    With this information, you can call the [offer calculation endpoint](/api-reference/tariffs/calculate_price).
 
-Before submitting the order via the API, you need to ensure that customers have received all the required contract and pricing information, have accepted the terms and conditions (AGB), have confirmed the email address and have accepted the offer.
+    This endpoint returns a response that details the different pricing components both on a monthly base and depending on the consumption, as well as the contract conditions (minimum duration, cancellation period).
+  </Step>
+  <Step title="Submit the order" titleSize="h3">
+    When a customer has accepted the offer, you can use the API to submit the customer and order details to the RABOT platform with a [create new order](/api-reference/orders/create_order) call
 
-Once the order is received by the RABOT platform, an order confirmation email will be sent out to the email address provided in the order.
+    For the order, you have to provide the following information (see API reference for all the details):
+
+    - a `tariffKey` to identify the requested product
+    - customer identification, contact details and initial password.
+    - delivery address and meter identification
+    - information about previous supplier, desired change date and expected yearly consumption
+    - bank details (for SEPA mandate)
+
+    If successful, the API returns a customer number and contract number, which uniquely identify the customer and order in the RABOT platform, and can be used in subsequent API calls, e.g. to check the status of the order processing.
+
+    Before submitting the order via the API, you need to ensure that customers have received all the required contract and pricing information, accepted the terms and conditions (AGB), confirmed the email address and accepted the offer.
+
+    Once the order is received by the RABOT platform, an order confirmation email will be sent out to the email address provided in the order.
+  </Step>
+  <Step title="Check order status" titleSize="h3">
+    After the order has been submitted successfully, you can use the [get order](/api-reference/orders/get_order) endpoint to follow the different processing states of the order.
+
+    An order can have one of the following states:
+
+    | Order status      | Description                                                                                                                                                                                                                                                                                                          |
+    | ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | `Open`            | The order has been received, but is not being processed yet if required data is missing (e.g. missing meter number)                                                                                                                                                                                                  |
+    | `Processing`      | The order is being processed, communication with other market actors (grid operators, previous supplier) is ongoing. This can take a few days up to a couple of weeks depending on the actors involved                                                                                                               |
+    | `Rejected`        | The order has been denied, e.g. due to a negative credit check                                                                                                                                                                                                                                                       |
+    | `Revoked`         | The customer has revoked the order                                                                                                                                                                                                                                                                                   |
+    | `PendingDelivery` | The order has been processed, and a contract confirmation has been sent to the customer, including a date for start of delivery                                                                                                                                                                                      |
+    | `Delivery`        | The supply contract is active and RABOT is delivering energy to the delivery location                                                                                                                                                                                                                                |
+    | `Cancelled`       | A contract termination has been received and an end of delivery date has been set. This could either be due to a customer actively sending a termination request, or because a customer has chosen a new supplier, and the supplier has communicated the termination request via the market communication processes. |
+    | `Unspecified`     | An unknown order state, indicating an error in the communcation with other market actors                                                                                                                                                                                                                             |
+  </Step>
+</Steps>
 
 ### Managing user password
 
 If the customer email address submitted with the order does not exist in the RABOT platform yet, a new user account is automatically created. If you provide a user password in the API call, this password will be used, and the customer will be able to log into RABOT user interfaces (web portal or mobile app) using email address and password.
 
 If no password is provided in the API call, the user account will be created with a random password, and the customer would need to go through a "forget password" flow to chose a new password.
-
-## Checking order status
-
-After the order has been submitted successfully, you can use the [get order](/api-reference/orders/get_order) endpoint to follow the different processing states of the order.
-
-An order can have one of the following states:
-
-| Order status      | Description                                                                                                                                                                                                                                                                                                          |
-| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Open`            | The order has been received, but is not being processed yet if required data is missing (e.g. missing meter number)                                                                                                                                                                                                  |
-| `Processing`      | The order is being processed, communication with other market actors (grid operators, previous supplier) is ongoing. This can take a few days up to a couple of weeks depending on the actors involved                                                                                                               |
-| `Rejected`        | The order has been denied, e.g. due to a negative credit check                                                                                                                                                                                                                                                       |
-| `Revoked`         | The customer has revoked the order                                                                                                                                                                                                                                                                                   |
-| `PendingDelivery` | The order has been processed, and a contract confirmation has been sent to the customer, including a date for start of delivery                                                                                                                                                                                      |
-| `Delivery`        | The supply contract is active and RABOT is delivering energy to the delivery location                                                                                                                                                                                                                                |
-| `Cancelled`       | A contract termination has been received and an end of delivery date has been set. This could either be due to a customer actively sending a termination request, or because a customer has chosen a new supplier, and the supplier has communicated the termination request via the market communication processes. |
-| `Unspecified`     | An unknown order state, indicating an error in the communcation with other market actors                                                                                                                                                                                                                             |
