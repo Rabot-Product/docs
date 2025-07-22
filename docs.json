@@ -60,6 +60,7 @@
               "api-reference/customers/list_customers",
               "api-reference/customers/list_contracts", 
               "api-reference/customers/get_contract_metrics",
+              "api-reference/customers/get_contract_costs",
               "api-reference/customers/list_contract_documents",
               "api-reference/customers/download_contract_document",
               "api-reference/customers/create_customer_linking",

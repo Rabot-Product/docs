@@ -4,9 +4,11 @@ openapi: "GET /partner/v1/day-ahead-prices/limited"
 description: "Get energy prices based on day-ahead market"
 ---
 
-Returns energy prices based on day-ahead spot market (EPEX), with a maximum of 48-hour interval. All timestamps are in Europe/Berlin time zone.
+Returns energy prices based on day-ahead market (EPEX spot auction, for DE-LU area), with a maximum of 48-hour interval. All timestamps are in Europe/Berlin time zone. Prices are returned as ct/kWh, including VAT.
 
 The prices are determined every day for the following day, and are available via the API after around 14:00.
+
+By default, the API returns the data for today and tomorrow, but you can chose a different time interval using the `from`/`to` request parameters.
 
 <Note>
   The data is sourced from the Bundesnetzagentur [SMARD.de](http://SMARD.de) platform, and is provided under Creative Commons Attribution 4.0 license, see  https://www.smard.de/home/datennutzung.
