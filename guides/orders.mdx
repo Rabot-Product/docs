@@ -22,9 +22,9 @@ Note that, to build a sales process for RABOT energy tariffs that is compliant t
     This endpoint returns a response that details the different pricing components both on a monthly base and depending on the consumption, as well as the contract conditions (minimum duration, cancellation period).
   </Step>
   <Step title="Submit the order" titleSize="h3">
-When a customer has accepted the offer, you can use the API to submit the customer and order details to the RABOT platform with a [create new order](/api-reference/orders/create_order) call.
+    When a customer has accepted the offer, you can use the API to submit the customer and order details to the RABOT platform with a [create new order](/api-reference/orders/create_order) call.
 
-For the order, you have to provide the following information (see API reference for all the details):
+    For the order, you have to provide the following information (see API reference for all the details):
 
     - a `tariffKey` to identify the requested product
     - customer identification, contact details and initial password.
@@ -32,9 +32,9 @@ For the order, you have to provide the following information (see API reference 
     - information about previous supplier, desired change date and expected yearly consumption
     - bank details (for SEPA mandate)
 
-If successful, the API returns a customer number and contract number, which uniquely identify the customer and order in the RABOT platform, and can be used in subsequent API calls, e.g. to check the status of the order processing.
+    If successful, the API returns a customer number and contract number, which uniquely identify the customer and order in the RABOT platform, and can be used in subsequent API calls, e.g. to check the status of the order processing.
 
-Before submitting the order via the API, you need to ensure that customers have received all the required contract and pricing information, accepted the terms and conditions (AGB), confirmed the email address and accepted the offer.
+    Before submitting the order via the API, you need to ensure that customers have received all the required contract and pricing information, accepted the terms and conditions (AGB), confirmed the email address and accepted the offer.
 
     Once the order is received by the RABOT platform, an order confirmation email will be sent out to the email address provided in the order.
   </Step>
