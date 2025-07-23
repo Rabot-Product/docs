@@ -10,19 +10,21 @@ Note that, to build a sales process for RABOT energy tariffs that is compliant t
   A `create:orders` scope is required to use this endpoint
 </Note>
 
-<Steps>
-  <Step title="Create a price quote" titleSize="h3">
+
+### Create a price quote
+
     To create a price quote for a prospect, you need to select a tariff, and provide some basic information about the prospect, such as:
 
     - postcode of the delivery address
     - expected yearly energy consumption
 
-  <br/>  With this information, you can call the [offer calculation endpoint](/api-reference/tariffs/calculate_price).
-<br/>
+   With this information, you can call the [offer calculation endpoint](/api-reference/tariffs/calculate_price).
+
     This endpoint returns a response that details the different pricing components both on a monthly base and depending on the consumption, as well as the contract conditions (minimum duration, cancellation period).
-  </Step>
-  <Step title="Submit the order" titleSize="h3">
-    When a customer has accepted the offer, you can use the API to submit the customer and order details to the RABOT platform with a [create new order](/api-reference/orders/create_order) call.<br/>
+
+### Submit the order
+
+    When a customer has accepted the offer, you can use the API to submit the customer and order details to the RABOT platform with a [create new order](/api-reference/orders/create_order) call.
 
     For the order, you have to provide the following information (see API reference for all the details):
 
@@ -37,8 +39,9 @@ Note that, to build a sales process for RABOT energy tariffs that is compliant t
     Before submitting the order via the API, you need to ensure that customers have received all the required contract and pricing information, accepted the terms and conditions (AGB), confirmed the email address and accepted the offer.
 
     Once the order is received by the RABOT platform, an order confirmation email will be sent out to the email address provided in the order.
-  </Step>
-  <Step title="Check order status" titleSize="h3">
+
+### Check order status
+
     After the order has been submitted successfully, you can use the [get order](/api-reference/orders/get_order) endpoint to follow the different processing states of the order.
 
     An order can have one of the following states:
@@ -52,10 +55,7 @@ Note that, to build a sales process for RABOT energy tariffs that is compliant t
     | `PendingDelivery` | The order has been processed, and a contract confirmation has been sent to the customer, including a date for start of delivery                                                                                                                                                                                      |
     | `Delivery`        | The supply contract is active and RABOT is delivering energy to the delivery location                                                                                                                                                                                                                                |
     | `Cancelled`       | A contract termination has been received and an end of delivery date has been set. This could either be due to a customer actively sending a termination request, or because a customer has chosen a new supplier, and the supplier has communicated the termination request via the market communication processes. |
-    | `Unspecified`     | An unknown order state, indicating an error in the communcation with other market actors                                                                                                                                                                                                                             |
-  </Step>
-</Steps>
-
+    | `Unspecified`     | An unknown order state, indicating an error in the communcation with other market actors                                                   
 ### Managing user password
 
 If the customer email address submitted with the order does not exist in the RABOT platform yet, a new user account is automatically created. If you provide a user password in the API call, this password will be used, and the customer will be able to log into RABOT user interfaces (web portal or mobile app) using email address and password.
