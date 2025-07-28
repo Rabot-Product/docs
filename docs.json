@@ -49,7 +49,8 @@
         "pages": [
           "guides/customers_contracts",
           "guides/orders",
-          "guides/order_states"
+          "guides/order_states",
+          "whats_new"
         ]
       },
       {
