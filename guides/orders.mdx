@@ -10,42 +10,41 @@ Note that, to build a sales process for RABOT energy tariffs that is compliant t
   A `create:orders` scope is required to use this endpoint
 </Note>
 
-
 ### Create a price quote
 
-    To create a price quote for a prospect, you need to select a tariff, and provide some basic information about the prospect, such as:
+To create a price quote for a prospect, you need to select a tariff, and provide some basic information about the prospect, such as:
 
-    - postcode of the delivery address
-    - expected yearly energy consumption
+- postcode of the delivery address
+- expected yearly energy consumption
 
-   With this information, you can call the [offer calculation endpoint](/api-reference/tariffs/calculate_price).
+With this information, you can call the [offer calculation endpoint](/api-reference/tariffs/calculate_price).
 
-    This endpoint returns a response that details the different pricing components both on a monthly base and depending on the consumption, as well as the contract conditions (minimum duration, cancellation period).
+This endpoint returns a response that details the different pricing components both on a monthly base and depending on the consumption, as well as the contract conditions (minimum duration, cancellation period).
 
 ### Submit the order
 
-    When a customer has accepted the offer, you can use the API to submit the customer and order details to the RABOT platform with a [create new order](/api-reference/orders/create_order) call.
+When a customer has accepted the offer, you can use the API to submit the customer and order details to the RABOT platform with a [create new order](/api-reference/orders/create_order) call.
 
-    For the order, you have to provide the following information (see API reference for all the details):
+For the order, you have to provide the following information (see API reference for all the details):
 
-    - a `tariffKey` to identify the requested product
-    - customer identification, contact details and initial password.
-    - delivery address and meter identification
-    - information about previous supplier, desired change date and expected yearly consumption
-    - bank details (for SEPA mandate)
+- a `tariffKey` to identify the requested product
+- customer identification, contact details and initial password.
+- delivery address and meter identification
+- information about previous supplier, desired change date and expected yearly consumption
+- bank details (for SEPA mandate)
 
-    If successful, the API returns a customer number and contract number, which uniquely identify the customer and order in the RABOT platform, and can be used in subsequent API calls, e.g. to check the status of the order processing.
+If successful, the API returns a customer number and contract number, which uniquely identify the customer and order in the RABOT platform, and can be used in subsequent API calls, e.g. to check the status of the order processing.
 
-    Before submitting the order via the API, you need to ensure that customers have received all the required contract and pricing information, accepted the terms and conditions (AGB), confirmed the email address and accepted the offer.
+Before submitting the order via the API, you need to ensure that customers have received all the required contract and pricing information, accepted the terms and conditions (AGB), confirmed the email address and accepted the offer.
 
-    Once the order is received by the RABOT platform, an order confirmation email will be sent out to the email address provided in the order.
+Once the order is received by the RABOT platform, an order confirmation email will be sent out to the email address provided in the order.
 
 ### Check order status
 
-    After the order has been submitted successfully, you can use the [get order](/api-reference/orders/get_order) endpoint to follow the different processing states of the order.
+After the order has been submitted successfully, you can use the [get order](/api-reference/orders/get_order) endpoint to follow the different processing states of the order.
 
-See [order states](/guides/order_states) for details about the different order states.
- 
+See [order states](/guides/order_states) for an explanation about the different order states.
+
 ### Managing user password
 
 If the customer email address submitted with the order does not exist in the RABOT platform yet, a new user account is automatically created. If you provide a user password in the API call, this password will be used, and the customer will be able to log into RABOT user interfaces (web portal or mobile app) using email address and password.
