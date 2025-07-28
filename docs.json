@@ -48,7 +48,8 @@
         "group": "Guides",
         "pages": [
           "guides/customers_contracts",
-          "guides/orders"
+          "guides/orders",
+          "guides/order_states"
         ]
       },
       {
