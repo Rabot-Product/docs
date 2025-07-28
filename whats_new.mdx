@@ -11,4 +11,5 @@ description: "API change history"
   - The [list orders](/api-reference/orders/list_orders) endpoint now allows to filter by customer number to only retrieve orders for a particular customer.
   - The [list customers](/api-reference/customers/list_customers) endpoint now allows to filter by external id.
   - List endpoints now provide a `hasMoreItems` flag in the response to indicate if more items are available beyond the end of the list. See [pagination](/guides/pagination) for more info.
+  - Improved error handling for the [contract metrics](/api-reference/customers/get_contract_metrics) endpoint. Now returns an empty response if no data is available, and a HTTP/404 status code if an invalid customer number or contract number is used.
 </Update>
