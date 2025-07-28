@@ -1,0 +1,23 @@
+---
+title: "Order states"
+description: "Description of your new file."
+---
+
+```mermaid
+stateDiagram
+  direction TB
+  [*] --> Open
+  Open --> Processing
+  Open --> Revoked
+  Processing --> Rejected
+  Processing --> Revoked
+  Processing --> PendingDelivery
+  PendingDelivery --> Delivery
+  PendingDelivery --> Revoked
+  PendingDelivery --> Cancelled
+  Delivery --> Cancelled
+  Delivery --> Revoked
+  Revoked --> [*]
+  Cancelled --> [*]
+  Rejected --> [*]
+``` 

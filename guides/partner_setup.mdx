@@ -8,9 +8,13 @@ To use the API, your organization has to be set up as a partner in the RABOT pla
   Make sure to always keep your client credentials safe. Do not include client credentials in client side code (smartphone app, web application), as they could easily be extracted and misused. If you think your credentials have been compromised, contact RABOT to invalidate the credentials and get a new password.
 </Warning>
 
-For development and testing purposes, the API is also available in a test environment, where you can create and modify data without triggering actual contract and grid operation processes. To access the test enviroment, you have to use different hostnames for your API request. Note that also your client credentials a different between test environment and production enviroment.
+For development and testing purposes, the API is also available in a **test environment**, where you can create and modify data without triggering actual contract and grid operation processes. 
+
+To access the test enviroment, you have to use different hostnames for your API request. 
 
 | API                   | Test environment            | Production environment |
 | :-------------------- | :-------------------------- | :--------------------- |
 | Authentication server | `test-auth.rabot-charge.de` | `auth.rabot-charge.de` |
 | API server            | `test-api.rabot-charge.de`  | `api.rabot-charge.de`  |
+
+Note that also your client credentials are different between test environment and production environment.

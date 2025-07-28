@@ -6,7 +6,11 @@ The RABOT Partner API uses OAuth 2.0 for authentication (see [RFC 7649](https://
 
 ### Token request
 
-```shell
+<Info>
+  replace CLIENT_ID and CLIENT_SECRET with the credentials you received from Rabot Charge. See [Partner setup](/guides/partner_setup)
+</Info>
+
+```cURL
 curl -L "auth.rabot-charge.de/connect/token" \
 -H "Content-Type: application/x-www-form-urlencoded" \
 -d "client_id={{CLIENT_ID}}" \
@@ -45,11 +49,13 @@ If successful, the authentication server responds with a HTTP/200 status code, a
 }
 ```
 
-In all requests to the partner API, include the access token as Bearer token in the HTTP authorization header. Note that the token only has a limited life time; when the life time has expired, you will need to request a new token from the authentication server.
+In all requests to the partner API, include the access token as **Bearer token** in the HTTP authorization header:
 
-### Example request
-
-```shell
+```cURL Example API request
 curl -L "https://api.rabot-charge.de/partners/v1/tariffs" \
 -H "Authorization: Bearer eyJhbGciOiJS....QnkY36d_ac"
 ```
+
+<Note>
+  Note that the token only has a limited life time; when the life time has expired, you will need to request a new token from the authentication server.
+</Note>
