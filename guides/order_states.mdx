@@ -3,21 +3,39 @@ title: "Order states"
 description: "Description of your new file."
 ---
 
-```mermaid
-stateDiagram
-  direction TB
-  [*] --> Open
-  Open --> Processing
-  Open --> Revoked
-  Processing --> Rejected
-  Processing --> Revoked
-  Processing --> PendingDelivery
-  PendingDelivery --> Delivery
-  PendingDelivery --> Revoked
-  PendingDelivery --> Cancelled
-  Delivery --> Cancelled
-  Delivery --> Revoked
-  Revoked --> [*]
-  Cancelled --> [*]
-  Rejected --> [*]
-``` 
+After new order has been received in the Rabot platform either by API or via the web order funnel, it goes through different stages depending on processing and user input:
+
+<Frame>
+  Order status sequence diagram
+
+  ```mermaid
+  stateDiagram
+    direction TB
+    [*] --> Open
+    Open --> Processing
+    Open --> Revoked
+    Processing --> Rejected
+    Processing --> Revoked
+    Processing --> PendingDelivery
+    PendingDelivery --> Delivery
+    PendingDelivery --> Revoked
+    PendingDelivery --> Cancelled
+    Delivery --> Cancelled
+    Delivery --> Revoked
+    Rejected --> Processing
+    Revoked --> [*]
+    Cancelled --> [*]
+    Rejected --> [*]
+  ```
+</Frame>
+
+| Order status      | Description                                                                                                                                                                                                                                                                                                          |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Open`            | The order has been received, but is not being processed yet if required data is missing (e.g. missing meter number)                                                                                                                                                                                                  |
+| `Processing`      | The order is being processed, communication with other market actors (grid operators, previous supplier) is ongoing. This can take a few days up to a couple of weeks depending on the actors involved                                                                                                               |
+| `Rejected`        | The order has been denied, e.g. due to a negative credit check or missing/incorrect information                                                                                                                                                                                                                      |
+| `Revoked`         | The customer has revoked the order                                                                                                                                                                                                                                                                                   |
+| `PendingDelivery` | The order has been processed, and a contract confirmation has been sent to the customer, including a date for start of delivery                                                                                                                                                                                      |
+| `Delivery`        | The supply contract is active and RABOT is delivering energy to the delivery location                                                                                                                                                                                                                                |
+| `Cancelled`       | A contract termination has been received and an end of delivery date has been set. This could either be due to a customer actively sending a termination request, or because a customer has chosen a new supplier, and the supplier has communicated the termination request via the market communication processes. |
+| `Unspecified`     | An unknown order state, indicating an error in the communcation with other market actors                                                                                                                                                                                                                             |
