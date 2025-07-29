@@ -1,6 +1,9 @@
 ---
-title: 'Calculate offer price'
+title: "Calculate offer price"
 openapi: "POST /partner/v1/tariffs/{tariffKey}/calculation"
-description: 'Calculate an offer price for a given tariff'
+description: "Calculate an offer price for a given tariff"
 ---
 
+With this API endpoint, you can calculate a personalized price offer for a prospect. You need to provide a `tariffKey` and the prospect's postcode and yearly energy consumption as minimum input for the calculation.
+
+You can retrieve the available tariffs using the [list tariffs](/api-reference/tariffs/list_tariffs) endpoint.
