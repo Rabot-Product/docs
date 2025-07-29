@@ -1,5 +1,6 @@
 ---
 title: "Customers and Contracts"
+icon: "address-book"
 ---
 
 The Partner API can provide access to customer and contract data. Depending on the partnership scope and agreed data privacy policies, your API client will have a certain access scope assigned (see [Scopes](/guides/access#scopes)), which controls the visibility of customer and contract information.
@@ -77,6 +78,11 @@ You can use the `ValueType` request parameter to define if you want to only rece
 | `Forecast` | return only data based on estimations, e.g. consumption estimated based on standard load profiles (SLP), not confirmed by actual meter reading yet                                                                           |
 | `Dynamic`  | return either actual or forecasted data for the whole period, but not mixed                                                                                                                                                  |
 | `Combined` | return either actual or forecasted data. E.g. when querying data for a month on daily level, for some days the API might returned actual data, while for other days might return forecasted data, based on data availability |
+
+<Tip>
+  In general, it is advisable to use `Combined` valuetype as a default
+</Tip>
+
 
 ### Periods and Intervals
 
