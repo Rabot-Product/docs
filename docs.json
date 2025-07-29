@@ -73,7 +73,7 @@
           },         
           {
             "group": "Tariffs and Prices",
-            "icon": "badge-euro",
+            "icon": "money-check-dollar",
             "pages": [
               "api-reference/tariffs/list_tariffs",
               "api-reference/tariffs/calculate_price",
@@ -82,7 +82,7 @@
           },
           {
             "group": "Orders",
-            "icon": "shopping-cart",
+            "icon": "cart-shopping",
             "pages": [
               "api-reference/orders/create_order",
               "api-reference/orders/list_orders",
