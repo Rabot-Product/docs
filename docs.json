@@ -73,7 +73,7 @@
           },         
           {
             "group": "Tariffs and Prices",
-            "icon": "money-check-dollar",
+            "icon": "tag",
             "pages": [
               "api-reference/tariffs/list_tariffs",
               "api-reference/tariffs/calculate_price",
