@@ -58,6 +58,7 @@
         "pages": [
           {
             "group": "Customers and Contracts",
+            "icon": "address-book",
             "pages": [
               "api-reference/customers/list_customers",
               "api-reference/customers/list_contracts", 
@@ -72,6 +73,7 @@
           },         
           {
             "group": "Tariffs and Prices",
+            "icon": "badge-euro",
             "pages": [
               "api-reference/tariffs/list_tariffs",
               "api-reference/tariffs/calculate_price",
@@ -80,6 +82,7 @@
           },
           {
             "group": "Orders",
+            "icon": "shopping-cart",
             "pages": [
               "api-reference/orders/create_order",
               "api-reference/orders/list_orders",
