@@ -83,7 +83,6 @@ You can use the `ValueType` request parameter to define if you want to only rece
   In general, it is advisable to use `Combined` valuetype as a default
 </Tip>
 
-
 ### Periods and Intervals
 
 The API allows to retrieve data in different granularity, from to 15 minute intervals, up to aggregation on monthly or yearly level. Use the `interval` parameter to select the aggregation level. To limit the size of the result set, depending on the selected `interval`, you can only query a limited time period:
@@ -108,7 +107,7 @@ curl -L "https://api.rabot-charge.de/partner/v1/customers/87678631/contracts/267
 -H "Authorization: ••••••"
 ```
 
-```json Response [expandable]
+```json Response expandable
 {
     "data": {
         "valueUnitInfo": "in kWh",
@@ -167,7 +166,7 @@ curl -L "https://api.rabot-charge.de/partner/v1/customers/87678631/contracts/267
 -H "Authorization: ••••••" 
 ```
 
-```json Response [expandable]
+```json Response expandable
 {
     "data": {
         "valueUnitInfo": "in Euro",
@@ -221,7 +220,7 @@ curl -L "https://api.rabot-charge.de/partner/v1/customers/87678631/contracts/267
 -H "Authorization: ••••••"
 ```
 
-```json Response [expandable]
+```json Response expandable
 {
     "data": {
         "valueUnitInfo": "in Cent/kWh",
@@ -280,13 +279,70 @@ curl -L "https://api.rabot-charge.de/partner/v1/customers/87678631/contracts/267
 
 The API also provides access to relevant contract-related documents, such as the preypayment and settlement invoices, so that your application can present these documents to the customer to review or download.
 
-* Use [list contract documents](/api-reference/customers/list_contract_documents) to retrieve the list of documents that are available for a contract. 
-* With a `fileId` from the API call above, you can then download an individual document using the [download document](/api-reference/customers/download_contract_document) endpoint
+1. Use [get contract documents](/api-reference/customers/list_contract_documents) to retrieve the list of documents that are available for a contract.
+
+```cURL Example request
+curl -L "https://api.rabot-charge.de/partner/v1/customers/46491184/contracts/98361641/documents" \
+-H "Authorization: ••••••"
+```
+
+```json Example response
+{
+    "data": {
+        "items": [
+            {
+                "fileId": "9ab28c33-a680-48c1-a7d1-1528a1e97a24",
+                "documentType": "PrePayment",
+                "name": "DemoPrepayment_202503",
+                "extension": ".pdf",
+                "sizeInBytes": 74681,
+                "isAvailableForCustomer": true,
+                "lastDownloadedAt": "2025-07-18",
+                "info": {
+                    "TargetMonths": [
+                        "2025-03"
+                    ]
+                },
+                "billogramUrl": null
+            },
+            {
+                "fileId": "c88c2551-d76f-4f1d-a1c3-2806e7367ba3",
+                "documentType": "Settlement",
+                "name": "DemoSettlement_202503",
+                "extension": ".pdf",
+                "sizeInBytes": 199261,
+                "isAvailableForCustomer": true,
+                "lastDownloadedAt": "2025-07-18",
+                "info": {
+                    "TargetMonths": [
+                        "2025-03"
+                    ]
+                },
+                "billogramUrl": null
+            }
+        ]
+    },
+    "isSuccess": true,
+    "message": null,
+    "error": null
+}
+```
+
+2. With a `fileId` from the API call above, you can then download an individual document using the [download document](/api-reference/customers/download_contract_document) endpoint
+
+```cURL Example request
+curl -L "https://api.rabot-charge.de/partner/v1/customers/46491184/contracts/98361641/documents/9ab28c33-a680-48c1-a7d1-1528a1e97a24" \
+-H "Authorization: ••••••"
+```
+
+<Frame caption="Example response">
+![](/images/document_download_response.jpg)
+</Frame>
 
 ## Contract cost details
 
-To understand the price components that make up the contract cost, the API offers the [contract cost details](/api-reference/customers/get_contract_cost) endpoint. This endpoint provides the same information that the customer has received together with their order confirmation, and splits out energy cost, service fees and all applicable taxes and levies.
+To understand the price components that make up the contract cost, the API offers the [contract cost details](/api-reference/customers/get_contract_costs) endpoint. This endpoint provides the same information that customers have received together with their order confirmation, and splits out energy cost, service fees and all applicable taxes and levies.
 
 <Note>
-  The price component information only applies to dynamic price tariffs, **not**  for fixed price tariffs (that guarantee the same basic fee and working price for the duration of the contract). 
+  The price component information only applies to dynamic price tariffs, **not**  for fixed price tariffs (that guarantee the same basic fee and working price for the duration of the contract).
 </Note>
