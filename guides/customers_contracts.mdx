@@ -275,3 +275,18 @@ curl -L "https://api.rabot-charge.de/partner/v1/customers/87678631/contracts/267
     "error": null
 }
 ```
+
+## Contract documents
+
+The API also provides access to relevant contract-related documents, such as the preypayment and settlement invoices, so that your application can present these documents to the customer to review or download.
+
+* Use [list contract documents](/api-reference/customers/list_contract_documents) to retrieve the list of documents that are available for a contract. 
+* With a `fileId` from the API call above, you can then download an individual document using the [download document](/api-reference/customers/download_contract_document) endpoint
+
+## Contract cost details
+
+To understand the price components that make up the contract cost, the API offers the [contract cost details](/api-reference/customers/get_contract_cost) endpoint. This endpoint provides the same information that the customer has received together with their order confirmation, and splits out energy cost, service fees and all applicable taxes and levies.
+
+<Note>
+  The price component information only applies to dynamic price tariffs, **not**  for fixed price tariffs (that guarantee the same basic fee and working price for the duration of the contract). 
+</Note>
